@@ -1,0 +1,247 @@
+/* General reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body Styling */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    color: #333;
+}
+
+/* Header Style */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #333;
+    color: white;
+}
+
+.left-header {
+    display: flex;
+    align-items: center;
+}
+
+.brand-name {
+    font-size: 24px;
+    font-weight: bold;
+    margin-right: 20px;
+}
+
+.add-game-button {
+    padding: 8px 16px;
+    font-size: 16px;
+    background-color: #00bcd4;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.add-game-button:hover {
+    background-color: #0097a7;
+}
+
+.right-header {
+    display: flex;
+    align-items: center;
+}
+
+.auth-button {
+    padding: 8px 16px;
+    font-size: 16px;
+    background-color: #ff4081;
+    color: white;
+    border: none;
+    cursor: pointer;
+    margin-left: 15px;
+    border-radius: 5px;
+}
+
+.auth-button:hover {
+    background-color: #f50057;
+}
+
+/* Main Content Section */
+.main-content {
+    padding: 20px;
+    max-width: 500px;
+    margin: 20px auto;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    font-size: 36px;
+    color: #444;
+    margin-bottom: 20px;
+}
+
+hr {
+    border: 1px solid #ddd;
+    margin: 20px 0;
+}
+
+.form-container {
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+label {
+    font-size: 18px;
+    margin-bottom: 5px;
+    display: block;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+input:focus {
+    border-color: #00bcd4;
+    outline: none;
+}
+
+.submit-button {
+    width: 100%;
+    padding: 10px;
+    background-color: #00bcd4;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.submit-button:hover {
+    background-color: #0097a7;
+}
+
+/* Users Table */
+.users-list {
+    margin-top: 20px;
+}
+
+.users-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.users-table th, .users-table td {
+    padding: 12px;
+    text-align: left;
+    border: 1px solid #ddd;
+}
+
+.users-table th {
+    background-color: #f1f1f1;
+    font-weight: bold;
+}
+
+.users-table td {
+    background-color: #fff;
+}
+
+.user-image {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+.action-button {
+    padding: 8px 16px;
+    font-size: 14px;
+    background-color: #00bcd4;
+    color: white;
+    border: none;
+    cursor: pointer;
+    margin-right: 10px;
+    border-radius: 5px;
+}
+
+.action-button:hover {
+    background-color: #0097a7;
+}
+
+/* Redirect Link */
+.redirect-link {
+    margin-top: 15px;
+    text-align: center;
+}
+
+.link-button {
+    color: #00bcd4;
+    text-decoration: none;
+}
+
+.link-button:hover {
+    text-decoration: underline;
+}
+
+/* Users Table - Increased Width */
+.users-list {
+    margin-top: 20px;
+    width: 100%;
+    overflow-x: auto;  /* To make the table scrollable if necessary */
+}
+
+.users-table {
+    width: 100%;
+    max-width: 1200px;  /* Set max width to control the maximum table width */
+    margin: 0 auto;  /* Center the table */
+    border-collapse: collapse;
+}
+
+.users-table th, .users-table td {
+    padding: 15px;  /* Increase padding for better spacing */
+    text-align: left;
+    border: 1px solid #ddd;
+}
+
+.users-table th {
+    background-color: #f1f1f1;
+    font-weight: bold;
+    width: auto;  /* Allow columns to adjust according to their content */
+}
+
+.users-table td {
+    background-color: #fff;
+    width: auto;  /* Allow columns to adjust according to their content */
+}
+
+.user-image {
+    width: 60px;  /* Make the user images slightly bigger */
+    height: 60px;
+    border-radius: 50%;
+}
+
+.action-button {
+    padding: 10px 20px;
+    font-size: 14px;
+    background-color: #00bcd4;
+    color: white;
+    border: none;
+    cursor: pointer;
+    margin-right: 10px;
+    border-radius: 5px;
+}
+
+.action-button:hover {
+    background-color: #0097a7;
+}
