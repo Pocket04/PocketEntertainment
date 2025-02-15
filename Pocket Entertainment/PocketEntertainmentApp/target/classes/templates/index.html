@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/comms :: head}"></head>
+<body>
+
+    <!-- Include Header -->
+    <div th:replace="~{fragments/comms :: header}"></div>
+
+    <div class="container">
+        <div class="box">
+            <h2>Welcome to Pocket Entertainment</h2>
+            <p>We offer a variety of games and cosmetics to enhance your gaming experience!</p>
+            <p>To get started, <a th:href="@{/login}">Login</a> or <a th:href="@{/register}">Register</a>.</p>
+        </div>
+    </div>
+
+    <!-- Include Footer -->
+    <div th:replace="~{fragments/comms :: footer}"></div>
+
+</body>
+</html>

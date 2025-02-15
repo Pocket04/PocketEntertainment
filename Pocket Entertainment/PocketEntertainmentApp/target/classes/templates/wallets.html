@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wallets</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+
+    <!-- Include Header -->
+    <div th:replace="fragments/comms :: header"></div>
+
+    <div class="container">
+        <h2>Your Wallets</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Currency</th>
+                    <th>UUID</th>
+                    <th>Balance</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>USD</td>
+                    <td>abcd1234</td>
+                    <td>$100</td>
+                    <td><button>Add Balance</button></td>
+                </tr>
+                <tr>
+                    <td>EUR</td>
+                    <td>efgh5678</td>
+                    <td>€50</td>
+                    <td><button>Add Balance</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Include Footer -->
+    <div th:replace="fragments/comms :: footer"></div>
+
+</body>
+</html>

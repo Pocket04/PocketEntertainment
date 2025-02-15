@@ -1,6 +1,7 @@
 package com.pockEtentertainmentApp.cosmetic.model;
 
 import com.pockEtentertainmentApp.game.model.Game;
+import com.pockEtentertainmentApp.user.model.User;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -37,4 +38,7 @@ public class Cosmetic {
 
     @Column(nullable = false)
     private BigDecimal price;
+
+    @ManyToOne
+    private User owner;
 }

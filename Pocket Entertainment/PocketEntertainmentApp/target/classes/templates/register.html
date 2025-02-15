@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+
+    <!-- Include Header -->
+    <div th:replace="fragments/comms :: header"></div>
+
+    <div class="container-slim">
+        <div class="box register-form">
+            <h2>Register</h2>
+            <form th:action="@{/register}" th:method="POST" th:object="${registerRequest}">
+                <input type="email" name="email" placeholder="Email" th:field="*{email}" required>
+                <input type="text" name="username" placeholder="Username" th:field="*{username}" required>
+                <input type="password" name="password" placeholder="Password" th:field="*{password}" required>
+                <input type="submit" value="Register">
+            </form>
+        </div>
+    </div>
+
+    <!-- Include Footer -->
+    <div th:replace="fragments/comms :: footer"></div>
+
+</body>
+</html>

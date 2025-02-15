@@ -1,6 +1,7 @@
 package com.pockEtentertainmentApp.game.model;
 
 import com.pockEtentertainmentApp.cosmetic.model.Cosmetic;
+import com.pockEtentertainmentApp.user.model.User;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -32,4 +33,8 @@ public class Game {
 
     @OneToMany(mappedBy = "game")
     private List<Cosmetic> cosmetics;
+
+    @ManyToOne
+    private User owner;
+
 }

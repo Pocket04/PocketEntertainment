@@ -20,7 +20,7 @@ public class Purchase {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
 
-    @OneToOne
+    @ManyToOne
     private Wallet wallet;
 
     @Column(nullable = false)

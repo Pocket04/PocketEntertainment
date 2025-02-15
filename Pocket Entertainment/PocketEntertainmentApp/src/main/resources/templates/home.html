@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/comms::head"></head>
+<body>
+
+    <!-- Include Header -->
+    <div th:replace="fragments/comms :: header"></div>
+
+    <div class="container-slim">
+        <h2 th:text="'Welcome, ' + *{user.username}"></h2>
+
+        <div class="tables">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Games</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Game 1</td>
+                    </tr>
+                    <tr>
+                        <td>Game 2</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Cosmetics with Refund</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Cosmetic 1</td>
+                    </tr>
+                    <tr>
+                        <td>Cosmetic 2</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Your Current Balance</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>$50</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Include Footer -->
+    <div th:replace="fragments/comms :: footer"></div>
+
+</body>
+</html>

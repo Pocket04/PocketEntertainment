@@ -1,5 +1,6 @@
 package com.pockEtentertainmentApp.wallet.model;
 
+import com.pockEtentertainmentApp.purchases.model.Purchase;
 import com.pockEtentertainmentApp.user.model.User;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -7,6 +8,7 @@ import lombok.Builder;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.UUID;
 
 @Table
@@ -29,5 +31,8 @@ public class Wallet {
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private Currency currency;
+
+    @OneToMany(mappedBy = "wallet")
+    private List<Purchase> purchases;
 
 }
