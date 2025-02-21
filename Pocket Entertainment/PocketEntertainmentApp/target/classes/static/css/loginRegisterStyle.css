@@ -1,0 +1,151 @@
+/* General Page Styling */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #eceff4; /* Adjusted to match screenshot */
+}
+
+/* Navbar */
+.navbar {
+    background-color: #222;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 20px;
+}
+
+.nav-left {
+    display: flex;
+    align-items: center;
+}
+
+.add-game {
+    background-color: #17a2b8;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-left: 15px;
+    font-size: 14px;
+}
+
+.auth-buttons button {
+    background-color: #e91e63;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 14px;
+    margin-left: 8px;
+}
+
+/* Authentication Box */
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80vh;
+}
+
+.auth-box {
+    background-color: white;
+    padding: 25px;
+    width: 350px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    text-align: center;
+}
+
+.auth-box h2 {
+    margin-bottom: 20px;
+    font-size: 24px; /* Adjusted for better readability */
+}
+
+.auth-box label {
+    display: block;
+    text-align: left;
+    font-weight: bold;
+    margin-top: 10px;
+    font-size: 14px;
+}
+
+.auth-box input {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.auth-button {
+    width: 100%;
+    padding: 10px;
+    background-color: #17a2b8;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.auth-button:hover {
+    background-color: #138496;
+}
+
+/* Footer */
+footer {
+    background-color: #222;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    font-size: 14px;
+}
+
+footer a {
+    color: #17a2b8;
+    text-decoration: none;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+.auth-box textarea {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+    height: 80px;
+    resize: none;
+}
+.auth-box select {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+    background-color: white;
+}
+/* Profile Image Preview */
+#profile-img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    display: block;
+    margin: 10px auto;
+}
+
+

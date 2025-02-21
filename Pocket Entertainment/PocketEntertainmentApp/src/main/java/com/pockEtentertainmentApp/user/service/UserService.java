@@ -1,23 +1,31 @@
 package com.pockEtentertainmentApp.user.service;
 
+import com.pockEtentertainmentApp.security.AuthenticationMetadata;
+import com.pockEtentertainmentApp.user.model.Role;
 import com.pockEtentertainmentApp.user.model.User;
 import com.pockEtentertainmentApp.user.repository.UserRepository;
 import com.pockEtentertainmentApp.web.dto.LoginRequest;
 import com.pockEtentertainmentApp.web.dto.RegisterRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 import java.util.UUID;
 
 @Service
-public class UserService {
+public class UserService implements UserDetailsService {
 
     private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
     @Autowired
-    public UserService(UserRepository userRepository) {
+    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
 
@@ -28,7 +36,7 @@ public class UserService {
             throw new RuntimeException("User not found");
         }
         User user = optional.get();
-        if (!user.getPassword().equals(loginRequest.getPassword())){
+        if (!passwordEncoder.matches(loginRequest.getPassword(), user.getPassword())){
             throw new RuntimeException("Wrong password");
         }
 
@@ -47,19 +55,24 @@ public class UserService {
         User user = User.builder()
                 .username(registerRequest.getUsername())
                 .email(registerRequest.getEmail())
-                .password(registerRequest.getPassword())
+                .password(passwordEncoder.encode(registerRequest.getPassword()))
+                .isActive(true)
+                .role(Role.USER)
                 .build();
 
 
         userRepository.save(user);
     }
 
-    public UUID getId(User user){
-
-        return user.getId();
-    }
-
     public User getUserById(UUID uuid) {
         return userRepository.findById(uuid).orElseThrow(() -> new RuntimeException("User not found"));
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+
+        User user = userRepository.findByUsername(username).orElseThrow(() -> new RuntimeException("User not found"));
+
+        return new AuthenticationMetadata(user.getId(), username, user.getPassword(), user.getRole(), user.isActive());
     }
 }

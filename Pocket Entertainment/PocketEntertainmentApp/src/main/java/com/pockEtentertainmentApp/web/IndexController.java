@@ -1,5 +1,6 @@
 package com.pockEtentertainmentApp.web;
 
+import com.pockEtentertainmentApp.security.AuthenticationMetadata;
 import com.pockEtentertainmentApp.user.model.User;
 import com.pockEtentertainmentApp.user.service.UserService;
 import com.pockEtentertainmentApp.web.dto.LoginRequest;
@@ -7,11 +8,13 @@ import com.pockEtentertainmentApp.web.dto.RegisterRequest;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.UUID;
@@ -33,15 +36,9 @@ public class IndexController {
     }
 
     @GetMapping("/home")
-    public ModelAndView homePage(HttpSession session) {
+    public ModelAndView homePage(@AuthenticationPrincipal AuthenticationMetadata authenticationMetadata) {
 
-        UUID uuid = (UUID) session.getAttribute("user_id");
-        User user = userService.getUserById(uuid);
-
-        if (user == null) {
-            return new ModelAndView("redirect:/login");
-        }
-
+        User user = userService.getUserById(authenticationMetadata.getId());
 
         ModelAndView mav = new ModelAndView();
         mav.setViewName("home");
@@ -49,25 +46,17 @@ public class IndexController {
         return mav;
     }
     @GetMapping("/login")
-    public ModelAndView loginPage() {
+    public ModelAndView loginPage(@RequestParam(value = "error", required = false) String errorParam) {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("login");
         modelAndView.addObject("loginRequest", new LoginRequest());
 
+        if (errorParam != null) {
+            modelAndView.addObject("errorMessage", "Incorrect username or password.");
+        }
+
         return modelAndView;
     }
-    @PostMapping("/login")
-    public String login(@Valid LoginRequest loginRequest, BindingResult bindingResult, HttpSession httpSession){
-
-        if (bindingResult.hasErrors()) {
-            return "login";
-        }
-        User user = userService.login(loginRequest);
-        httpSession.setAttribute("user_id", user.getId());
-
-        return "redirect:/home";
-    }
-
 
     @GetMapping("/register")
     public ModelAndView registerPage() {
@@ -92,12 +81,6 @@ public class IndexController {
         userService.registerUser(registerRequest);
 
         return "redirect:/login";
-    }
-
-    @GetMapping("/logout")
-    public String logout(HttpSession session) {
-        session.invalidate();
-        return "redirect:/";
     }
 
 }

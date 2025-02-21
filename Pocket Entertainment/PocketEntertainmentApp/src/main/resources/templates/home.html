@@ -1,65 +1,69 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments/comms::head"></head>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pocket Entertainment</title>
+    <link rel="stylesheet" href="/css/homeStyle.css">
+</head>
 <body>
+    <nav class="navbar">
+        <div class="nav-left">
+            <h1 th:href="@{/}" >Pocket Entertainment</h1>
+            <button class="add-game">Add Game</button>
+            <button class="add-game">Add Cosmetic</button>
+        </div>
+        <div class="auth-buttons">
+            <a th:href="@{/logout}" >
+                <button class="logout">Log Out</button>
+            </a>
+        </div>
+    </nav>
 
-    <!-- Include Header -->
-    <div th:replace="fragments/comms :: header"></div>
+    <div class="container">
+        <div class="games">
+            <h2>Games</h2>
+            <div class="game-item">
+                <h3>Game 1</h3>
+                <p>An exciting action-packed game.</p>
+                <p class="price">$19.99</p>
+            </div>
+            <div class="game-item">
+                <h3>Game 2</h3>
+                <p>A thrilling adventure game.</p>
+                <p class="price">$29.99</p>
+            </div>
+            <div class="game-item">
+                <h3>Game 3</h3>
+                <p>A strategy-based puzzle game.</p>
+                <p class="price">$14.99</p>
+            </div>
+        </div>
 
-    <div class="container-slim">
-        <h2 th:text="'Welcome, ' + *{user.username}"></h2>
-
-        <div class="tables">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Games</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Game 1</td>
-                    </tr>
-                    <tr>
-                        <td>Game 2</td>
-                    </tr>
-                </tbody>
-            </table>
-
-            <table>
-                <thead>
-                    <tr>
-                        <th>Cosmetics with Refund</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Cosmetic 1</td>
-                    </tr>
-                    <tr>
-                        <td>Cosmetic 2</td>
-                    </tr>
-                </tbody>
-            </table>
-
-            <table>
-                <thead>
-                    <tr>
-                        <th>Your Current Balance</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>$50</td>
-                    </tr>
-                </tbody>
-            </table>
+        <div class="cosmetics">
+            <h2>Cosmetics</h2>
+            <div class="cosmetic-item">
+                <h3>Cosmetic 1</h3>
+                <p>A stylish skin for your character.</p>
+                <p class="price">$5.99</p>
+                <button class="refund">Refund</button>
+            </div>
+            <div class="cosmetic-item">
+                <h3>Cosmetic 2</h3>
+                <p>A cool new weapon skin.</p>
+                <p class="price">$3.99</p>
+                <button class="refund">Refund</button>
+            </div>
+            <div class="cosmetic-item">
+                <h3>Cosmetic 3</h3>
+                <p>Limited edition skin.</p>
+                <p class="price">$7.99</p>
+                <button class="refund">Refund</button>
+            </div>
         </div>
     </div>
-
-    <!-- Include Footer -->
-    <div th:replace="fragments/comms :: footer"></div>
-
+    <footer>
+        <p>© 2025 Pocket Entertainment. All Rights Reserved. | <a href="contact.html" class="contact-link">Contact Us</a></p>
+    </footer>
 </body>
 </html>

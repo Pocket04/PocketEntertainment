@@ -1,0 +1,108 @@
+/* General Page Styling */
+html, body {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    background-color: #eceff4;
+    font-family: Arial, sans-serif;
+}
+
+/* Navbar */
+.navbar {
+    background-color: #222;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 20px;
+}
+
+.nav-left {
+    display: flex;
+    align-items: center;
+}
+
+.add-game {
+    background-color: #17a2b8;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-left: 15px;
+    font-size: 14px;
+}
+
+.auth-buttons button {
+    background-color: #e91e63;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 14px;
+    margin-left: 8px;
+}
+
+/* Content Section */
+.container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+/* Game Box */
+.game-box {
+    background-color: white;
+    padding: 25px;
+    width: 80%;
+    max-width: 800px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    text-align: center;
+}
+
+/* Game Image */
+.game-image {
+    width: 100%;
+    max-width: 600px;
+    border-radius: 10px;
+    margin-bottom: 15px;
+}
+
+/* Game Title */
+.game-box h1 {
+    font-size: 28px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+/* Game Description */
+.game-description {
+    font-size: 16px;
+    color: #555;
+    line-height: 1.5;
+}
+
+/* Footer */
+footer {
+    background-color: #222;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    width: 100%;
+    font-size: 14px;
+    margin-top: auto;
+}
+
+footer a {
+    color: #17a2b8;
+    text-decoration: none;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}

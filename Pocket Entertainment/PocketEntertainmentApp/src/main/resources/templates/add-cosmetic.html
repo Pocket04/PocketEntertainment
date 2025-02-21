@@ -1,35 +1,47 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add Cosmetic</title>
-    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/loginRegisterStyle.css">
 </head>
 <body>
 
-    <!-- Include Header -->
-    <div th:replace="fragments/comms :: header"></div>
+    <!-- Add Cosmetic Form Container -->
+    <div class="container">
+        <div class="auth-box">
+            <h2>Add Cosmetic</h2>
+            <form>
+                <label for="cosmetic-name">Cosmetic Name:</label>
+                <input type="text" id="cosmetic-name" placeholder="Enter cosmetic name" required>
 
-    <div class="container-slim">
-        <h2>Add New Cosmetic</h2>
-        <form action="/add-cosmetic" method="POST">
-            <select name="game" required>
-                <option value="">Select Game</option>
-                <!-- Populate this list dynamically with available games -->
-                <option value="game1">Game 1</option>
-                <option value="game2">Game 2</option>
-            </select>
-            <input type="text" name="cosmeticName" placeholder="Cosmetic Name" required>
-            <input type="url" name="imageUrl" placeholder="Image URL" required>
-            <input type="number" name="price" placeholder="Price" required>
-            <textarea name="description" placeholder="Description" required></textarea>
-            <input type="submit" value="Add Cosmetic">
-        </form>
+                <label for="description">Description:</label>
+                <textarea id="description" placeholder="Enter cosmetic description" required></textarea>
+
+                <label for="imageUrl">Image URL:</label>
+                <input type="url" id="imageUrl" placeholder="Enter image URL" required>
+
+                <label for="game">Select Game:</label>
+                <select id="game" required>
+                    <option value="">-- Select a Game --</option>
+                    <option value="game1">Game 1</option>
+                    <option value="game2">Game 2</option>
+                    <option value="game3">Game 3</option>
+                </select>
+
+                <label for="price">Price:</label>
+                <input type="number" id="price" placeholder="Enter price" required>
+
+                <button type="submit" class="auth-button">Add Cosmetic</button>
+            </form>
+        </div>
     </div>
 
-    <!-- Include Footer -->
-    <div th:replace="fragments/comms :: footer"></div>
+    <!-- Footer -->
+    <footer>
+        &copy; 2025 Pocket Entertainment. All rights reserved. | <a href="#">Privacy Policy</a>
+    </footer>
 
 </body>
 </html>

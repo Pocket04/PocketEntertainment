@@ -1,24 +1,44 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Planet of Peace</title>
-    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/POPStyle.css">
 </head>
 <body>
 
-    <!-- Include Header -->
-    <div th:replace="fragments/comms :: header"></div>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="nav-left">
+            <div class="logo">Pocket Entertainment</div>
+            <button class="add-game">Add Game</button>
+            <button class="add-game">Add Cosmetic</button>
+        </div>
+        <div class="auth-buttons">
+            <button class="register">Register</button>
+            <button class="login">Log In</button>
+            <button class="logout">Log Out</button>
+        </div>
+    </nav>
 
+    <!-- Game Display Section -->
     <div class="container">
-        <h2>Planet of Peace</h2>
-        <img src="planet_of_peace_image.jpg" alt="Planet of Peace" />
-        <p>A new game coming soon! Get ready for an exciting adventure similar to World of Warcraft.</p>
+        <div class="game-box">
+            <img src="https://gratisography.com/wp-content/uploads/2024/11/gratisography-augmented-reality-800x525.jpg" alt="Planet of Peace Game Image" class="game-image">
+            <h1>Planet of Peace</h1>
+            <p class="game-description">
+                **Planet of Peace** is an upcoming adventure game where players explore a beautifully crafted alien world. 
+                Immerse yourself in stunning landscapes, solve engaging puzzles, and experience an emotional journey that 
+                encourages harmony and collaboration.
+            </p>
+        </div>
     </div>
 
-    <!-- Include Footer -->
-    <div th:replace="fragments/comms :: footer"></div>
+    <!-- Footer -->
+    <footer>
+        &copy; 2025 Pocket Entertainment. All rights reserved. | <a href="#">Privacy Policy</a>
+    </footer>
 
 </body>
 </html>

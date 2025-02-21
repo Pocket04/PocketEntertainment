@@ -27,6 +27,12 @@ public class User {
     @Column(nullable = false, unique = true)
     private String username;
 
+    @Column
+    private String firstName;
+
+    @Column
+    private String lastName;
+
     @Column(nullable = false)
     private String password;
 
@@ -35,6 +41,11 @@ public class User {
 
     @Column
     private String profilePicture;
+
+    @Enumerated(EnumType.STRING)
+    private Role role;
+
+    private boolean isActive;
 
     @OneToMany(mappedBy = "owner", fetch = FetchType.EAGER)
     private List<Game> games;
