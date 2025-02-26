@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planet of Peace</title>
+    <link rel="stylesheet" href="/css/POPStyle.css">
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="nav-left">
+        <a th:href="@{/home}" >
+            <button class="add-game">Home</button>
+        </a>
+        <a th:href="@{/add-game}" >
+            <button class="add-game">Add Game</button>
+        </a>
+        <a th:href="@{/cosmetics/add}" >
+            <button class="add-game">Add Cosmetic</button>
+        </a>
+    </div>
+    <div class="auth-buttons">
+        <a th:href="@{/logout}" >
+            <button class="logout">Log Out</button>
+        </a>
+    </div>
+</nav>
+
+    <!-- Game Display Section -->
+    <div class="container">
+        <div class="game-box">
+            <img src="https://gratisography.com/wp-content/uploads/2024/11/gratisography-augmented-reality-800x525.jpg" alt="Planet of Peace Game Image" class="game-image">
+            <h1>Planet of Peace</h1>
+            <p class="game-description">
+                **Planet of Peace** is an upcoming adventure game where players explore a beautifully crafted alien world. 
+                Immerse yourself in stunning landscapes, solve engaging puzzles, and experience an emotional journey that 
+                encourages harmony and collaboration.
+            </p>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        &copy; 2025 Pocket Entertainment. All rights reserved. | <a href="#">Contact Us</a>
+    </footer>
+
+</body>
+</html>

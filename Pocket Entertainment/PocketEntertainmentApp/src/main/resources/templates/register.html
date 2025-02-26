@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - Pocket Entertainment</title>
+    <link rel="stylesheet" href="/css/loginRegisterStyle.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="nav-left">
+            <h1>Pocket Entertainment</h1>
+        </div>
+        <div class="auth-buttons">
+            <a th:href="@{/login}">
+                <button class="login">Log In</button>
+            </a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <form class="auth-box" th:action="@{/register}" th:method="POST" th:object="${registerRequest}">
+            <h2>Register</h2>
+            <label for="username">Username:</label>
+            <input type="text" placeholder="Enter your username" id="username" th:field="*{username}">
+            
+            <label for="email">Email:</label>
+            <input type="email" placeholder="Enter your email" id="email" th:field="*{email}">
+            
+            <label for="password">Password:</label>
+            <input type="password" placeholder="Enter your password" id="password" th:field="*{password}">
+            
+            <button type="submit" class="auth-button">Register</button>
+
+            <p>Already have an account? <a th:href="@{/login}">Log in</a> here.</p>
+        </form>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Pocket Entertainment. All rights reserved. | <a href="contact.html">Contact us</a></p>
+    </footer>
+
+</body>
+</html>
