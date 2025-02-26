@@ -8,7 +8,7 @@ import lombok.Data;
 @Data
 public class RegisterRequest {
 
-    @NotBlank
+    @NotBlank(message = "Please enter your email.")
     @Email
     private String email;
 

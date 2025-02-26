@@ -4,6 +4,7 @@ import com.pockEtentertainmentApp.security.AuthenticationMetadata;
 import com.pockEtentertainmentApp.user.model.Role;
 import com.pockEtentertainmentApp.user.model.User;
 import com.pockEtentertainmentApp.user.repository.UserRepository;
+import com.pockEtentertainmentApp.web.dto.EditAccountRequest;
 import com.pockEtentertainmentApp.web.dto.LoginRequest;
 import com.pockEtentertainmentApp.web.dto.RegisterRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,21 +29,6 @@ public class UserService implements UserDetailsService {
         this.passwordEncoder = passwordEncoder;
     }
 
-
-    public User login(LoginRequest loginRequest){
-        Optional<User> optional = userRepository.findByUsername(loginRequest.getUsername());
-
-        if(optional.isEmpty()){
-            throw new RuntimeException("User not found");
-        }
-        User user = optional.get();
-        if (!passwordEncoder.matches(loginRequest.getPassword(), user.getPassword())){
-            throw new RuntimeException("Wrong password");
-        }
-
-        return user;
-    }
-
     public void registerUser(RegisterRequest registerRequest){
 
         Optional<User> optional = userRepository.findByUsernameOrEmail(registerRequest.getUsername(), registerRequest.getEmail());
@@ -51,7 +37,6 @@ public class UserService implements UserDetailsService {
             throw new RuntimeException("Username or email already in use");
         }
 
-        new User();
         User user = User.builder()
                 .username(registerRequest.getUsername())
                 .email(registerRequest.getEmail())
@@ -66,6 +51,14 @@ public class UserService implements UserDetailsService {
 
     public User getUserById(UUID uuid) {
         return userRepository.findById(uuid).orElseThrow(() -> new RuntimeException("User not found"));
+    }
+    public void editUser(User user, EditAccountRequest editAccountRequest){
+        user.setFirstName(editAccountRequest.getFirstName());
+        user.setLastName(editAccountRequest.getLastName());
+        user.setEmail(editAccountRequest.getEmail());
+        user.setProfilePicture(editAccountRequest.getProfilePicture());
+        user.setEmail(editAccountRequest.getEmail());
+        userRepository.save(user);
     }
 
     @Override

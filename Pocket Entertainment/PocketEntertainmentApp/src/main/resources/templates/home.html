@@ -9,9 +9,18 @@
 <body>
     <nav class="navbar">
         <div class="nav-left">
-            <h1 th:href="@{/}" >Pocket Entertainment</h1>
-            <button class="add-game">Add Game</button>
-            <button class="add-game">Add Cosmetic</button>
+            <a th:href="@{/planet-of-peace}" >
+                <button class="add-game">Planet of Peace</button>
+            </a>
+            <a th:href="@{/add-game}" >
+                <button class="add-game">Add Game</button>
+            </a>
+            <a th:href="@{/cosmetics/add}" >
+                <button class="add-game">Add Cosmetic</button>
+            </a>
+            <a th:href="@{'/users/' + ${user.id}}" >
+                <button class="add-game">Account</button>
+            </a>
         </div>
         <div class="auth-buttons">
             <a th:href="@{/logout}" >
@@ -23,47 +32,35 @@
     <div class="container">
         <div class="games">
             <h2>Games</h2>
-            <div class="game-item">
-                <h3>Game 1</h3>
-                <p>An exciting action-packed game.</p>
-                <p class="price">$19.99</p>
-            </div>
-            <div class="game-item">
-                <h3>Game 2</h3>
-                <p>A thrilling adventure game.</p>
-                <p class="price">$29.99</p>
-            </div>
-            <div class="game-item">
-                <h3>Game 3</h3>
-                <p>A strategy-based puzzle game.</p>
-                <p class="price">$14.99</p>
-            </div>
+            <ul>
+                <li th:each="game : ${games}" class="game-item">
+                    <img class="profile-picture" th:src="${game.imageUrl}">
+                    <h3 th:text="${game.getName()}"></h3>
+                    <p th:text="${game.getDescription()}"></p>
+                    <p class="price" th:text="${game.getPrice()} + '$'"></p>
+                    <form th:method="@{'/games/' + ${game.getId()} + '/buy'}" th:type="POST">
+                        <button class="refund">Buy Game</button>
+                    </form>
+                </li>
+            </ul>
         </div>
 
         <div class="cosmetics">
             <h2>Cosmetics</h2>
-            <div class="cosmetic-item">
-                <h3>Cosmetic 1</h3>
-                <p>A stylish skin for your character.</p>
-                <p class="price">$5.99</p>
-                <button class="refund">Refund</button>
-            </div>
-            <div class="cosmetic-item">
-                <h3>Cosmetic 2</h3>
-                <p>A cool new weapon skin.</p>
-                <p class="price">$3.99</p>
-                <button class="refund">Refund</button>
-            </div>
-            <div class="cosmetic-item">
-                <h3>Cosmetic 3</h3>
-                <p>Limited edition skin.</p>
-                <p class="price">$7.99</p>
-                <button class="refund">Refund</button>
-            </div>
+            <ul>
+                <li th:each="cosmetic : ${cosmetics}" class="cosmetic-item">
+                    <img class="profile-picture" th:src="${cosmetic.imageUrl}">
+                    <h3 th:text="${cosmetic.name}"></h3>
+                    <p th:text="${cosmetic.description}"></p>
+                    <p th:text="${cosmetic.price} + '$'" class="price"></p>
+                    <button class="refund">Buy Cosmetic</button>
+                </li>
+            </ul>
         </div>
     </div>
+
     <footer>
-        <p>© 2025 Pocket Entertainment. All Rights Reserved. | <a href="contact.html" class="contact-link">Contact Us</a></p>
+        <p>© 2025 Pocket Entertainment. All Rights Reserved. | <a href="contact.html" class="contact-link">Contact us</a></p>
     </footer>
 </body>
 </html>

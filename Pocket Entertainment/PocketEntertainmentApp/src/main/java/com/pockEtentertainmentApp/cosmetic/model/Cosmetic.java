@@ -3,6 +3,7 @@ package com.pockEtentertainmentApp.cosmetic.model;
 import com.pockEtentertainmentApp.game.model.Game;
 import com.pockEtentertainmentApp.user.model.User;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -23,7 +24,7 @@ public class Cosmetic {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String name;
 
     @Column(nullable = false)
@@ -31,6 +32,7 @@ public class Cosmetic {
     private String imageUrl;
 
     @Column(nullable = false)
+    @Size(max=1000)
     private String description;
 
     @ManyToOne
@@ -38,7 +40,4 @@ public class Cosmetic {
 
     @Column(nullable = false)
     private BigDecimal price;
-
-    @ManyToOne
-    private User owner;
 }

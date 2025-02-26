@@ -44,7 +44,7 @@ button {
 .container {
     display: flex;
     justify-content: space-around;
-    padding: 20px;
+    padding: 20px 20px 80px;
 }
 
 .games, .cosmetics {
@@ -53,6 +53,12 @@ button {
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     width: 45%;
+}
+.profile-picture {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 2px solid #17a2b8;
 }
 
 h2 {
@@ -79,11 +85,14 @@ h2 {
     margin-top: 10px;
 }
 footer {
-    background-color: #222;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #333;
     color: white;
     text-align: center;
-    padding: 15px 0;
-    margin-top: auto;
+    padding: 10px 0;
 }
 
 footer a {

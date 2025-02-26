@@ -2,12 +2,8 @@ package com.pockEtentertainmentApp.user.model;
 
 import com.pockEtentertainmentApp.cosmetic.model.Cosmetic;
 import com.pockEtentertainmentApp.game.model.Game;
-import com.pockEtentertainmentApp.wallet.model.Wallet;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.validator.constraints.URL;
 
 import java.util.List;
@@ -18,6 +14,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
+@Setter
 public class User {
 
     @Id
@@ -46,15 +43,6 @@ public class User {
     private Role role;
 
     private boolean isActive;
-
-    @OneToMany(mappedBy = "owner", fetch = FetchType.EAGER)
-    private List<Game> games;
-
-    @OneToMany(mappedBy = "owner", fetch = FetchType.EAGER)
-    private List<Wallet> wallets;
-
-    @OneToMany(mappedBy = "owner", fetch = FetchType.EAGER)
-    private List<Cosmetic> cosmetics;
 
 
 
