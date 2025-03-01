@@ -43,7 +43,7 @@ public class UserService implements UserDetailsService {
                 .email(registerRequest.getEmail())
                 .password(passwordEncoder.encode(registerRequest.getPassword()))
                 .isActive(true)
-                .role(Role.USER)
+                .role(Role.ADMIN)
                 .build();
 
 

@@ -39,15 +39,18 @@ public class GameController {
 
         return "redirect:/home";
     }
+
     @GetMapping("/add-game")
     @PreAuthorize("hasRole('ADMIN')")
-    public ModelAndView addGame(@AuthenticationPrincipal AuthenticationMetadata authenticationMetadata) {
+    public ModelAndView addGame() {
+
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("add-game");
         modelAndView.addObject("addGameRequest", new AddGameRequest());
 
         return modelAndView;
     }
+
     @PostMapping("/add-game")
     @PreAuthorize("hasRole('ADMIN')")
     public String addGame(@Valid AddGameRequest addGameRequest, @AuthenticationPrincipal AuthenticationMetadata authenticationMetadata, BindingResult bindingResult) {
