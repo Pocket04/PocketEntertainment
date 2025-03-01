@@ -11,12 +11,14 @@
     <!-- Navbar -->
     <nav class="navbar">
         <div class="nav-left">
-            <div class="logo">Pocket Entertainment</div>
-            <button class="add-game">Add Game</button>
-            <button class="add-game">Add Cosmetic</button>
+            <a th:href="@{/home}" >
+                <button class="add-game">Home</button>
+            </a>
         </div>
         <div class="auth-buttons">
-            <button class="logout">Log Out</button>
+            <a th:href="@{/logout}" >
+                <button class="logout">Log Out</button>
+            </a>
         </div>
     </nav>
 
@@ -37,23 +39,18 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td><img src="https://via.placeholder.com/50" alt="User Profile"></td>
-                        <td>JohnDoe</td>
-                        <td>John</td>
-                        <td>Doe</td>
-                        <td>johndoe@example.com</td>
-                        <td class="role">User</td>
-                        <td><button class="role-button">Change Role</button></td>
-                    </tr>
-                    <tr>
-                        <td><img src="https://via.placeholder.com/50" alt="User Profile"></td>
-                        <td>JaneSmith</td>
-                        <td>Jane</td>
-                        <td>Smith</td>
-                        <td>janesmith@example.com</td>
-                        <td class="role">Admin</td>
-                        <td><button class="role-button">Change Role</button></td>
+                    <tr th:each="user : ${users}">
+                        <td><img id="profile-img" th:src="${#strings.isEmpty(user.profilePicture) ? 'https://goodwillsv.org/wp-content/uploads/2018/10/profile-pic-missing-default.jpg' : user.profilePicture}"></td>
+                        <td th:text="${user.username}"></td>
+                        <td th:text="${#strings.isEmpty(user.firstName) ? 'No first name set.' : user.firstName}">----</td>
+                        <td th:text="${#strings.isEmpty(user.lastName) ? 'No first name set.' : user.lastName}">----</td>
+                        <td th:text="${user.email}"></td>
+                        <td th:text="${user.role}" class="role"></td>
+                        <td>
+                            <form th:action="@{'/users/' + ${user.id} + '/role'}" th:method="PUT">
+                                <button class="role-button">Change Role</button>
+                            </form>
+                        </td>
                     </tr>
                 </tbody>
             </table>
@@ -62,7 +59,7 @@
 
     <!-- Footer -->
     <footer>
-        &copy; 2025 Pocket Entertainment. All rights reserved. | <a href="#">Contact us</a>
+        <p>© 2025 Pocket Entertainment. All Rights Reserved. | <a th:href="@{/contacts}" class="contact-link">Contact us</a></p>
     </footer>
 
 </body>

@@ -12,16 +12,23 @@
             <a th:href="@{/planet-of-peace}" >
                 <button class="add-game">Planet of Peace</button>
             </a>
-            <a th:href="@{/add-game}" >
+            <a th:if="${'ADMIN'.equals(user.role.toString())}" th:href="@{/games/add-game}" >
                 <button class="add-game">Add Game</button>
             </a>
-            <a th:href="@{/cosmetics/add}" >
+            <a th:if="${'ADMIN'.equals(user.role.toString())}" th:href="@{/cosmetics/add}" >
                 <button class="add-game">Add Cosmetic</button>
             </a>
             <a th:href="@{'/users/' + ${user.id}}" >
                 <button class="add-game">Account</button>
             </a>
         </div>
+
+        <div class="nav-center">
+            <a th:if="${'ADMIN'.equals(user.role.toString())}" th:href="@{/users}">
+                <button class="users">Users</button>
+            </a>
+        </div>
+
         <div class="auth-buttons">
             <a th:href="@{/logout}" >
                 <button class="logout">Log Out</button>
@@ -35,12 +42,11 @@
             <ul>
                 <li th:each="game : ${games}" class="game-item">
                     <img class="profile-picture" th:src="${game.imageUrl}">
-                    <h3 th:text="${game.getName()}"></h3>
-                    <p th:text="${game.getDescription()}"></p>
-                    <p class="price" th:text="${game.getPrice()} + '$'"></p>
-                    <form th:method="@{'/games/' + ${game.getId()} + '/buy'}" th:type="POST">
-                        <button class="refund">Buy Game</button>
-                    </form>
+                    <h2 th:text="${game.name}"></h2>
+                    <p th:text="${game.description}"></p>
+                        <a th:href="@{/files/virus-computer.gif}" th:download="virus-computer.gif">
+                            <button class="refund">Download</button>
+                        </a>
                 </li>
             </ul>
         </div>
@@ -50,7 +56,8 @@
             <ul>
                 <li th:each="cosmetic : ${cosmetics}" class="cosmetic-item">
                     <img class="profile-picture" th:src="${cosmetic.imageUrl}">
-                    <h3 th:text="${cosmetic.name}"></h3>
+                    <h2 th:text="${cosmetic.name}"></h2>
+                    <h3 th:text="${cosmetic.game.name}"></h3>
                     <p th:text="${cosmetic.description}"></p>
                     <p th:text="${cosmetic.price} + '$'" class="price"></p>
                     <button class="refund">Buy Cosmetic</button>
@@ -60,7 +67,7 @@
     </div>
 
     <footer>
-        <p>© 2025 Pocket Entertainment. All Rights Reserved. | <a href="contact.html" class="contact-link">Contact us</a></p>
+        <p>© 2025 Pocket Entertainment. All Rights Reserved. | <a th:href="@{/contacts}" class="contact-link">Contact us</a></p>
     </footer>
 </body>
 </html>

@@ -12,12 +12,6 @@
         <a th:href="@{/home}" >
             <button class="add-game">Home</button>
         </a>
-        <a th:href="@{/add-game}" >
-            <button class="add-game">Add Game</button>
-        </a>
-        <a th:href="@{/cosmetics/add}" >
-            <button class="add-game">Add Cosmetic</button>
-        </a>
     </div>
     <div class="auth-buttons">
         <a th:href="@{/logout}" >
@@ -26,22 +20,21 @@
     </div>
 </nav>
     <!-- Add Game Form Container -->
-    <form class="container" th:action="@{/add-game}" th:method="POST" th:object="${addGameRequest}">
+    <form class="container" th:action="@{/games/add-game}" th:method="POST" th:object="${addGameRequest}">
         <div class="auth-box">
             <h2>Add Game</h2>
             <form>
                 <label for="game-name">Game Name:</label>
                 <input type="text" id="game-name" placeholder="Enter game name" required th:field="*{name}">
+                <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="text-warning">Error Text Here</p>
 
                 <label for="description">Description:</label>
                 <textarea id="description" placeholder="Enter game description" required th:field="*{description}"></textarea>
+                <p th:if="${#fields.hasErrors('description')}" th:errors="*{description}" class="text-warning">Error Text Here</p>
 
                 <label for="imageUrl">Image URL:</label>
                 <input type="url" id="imageUrl" placeholder="Enter image URL" required th:field="*{imageUrl}">
-
-
-                <label for="price">Price:</label>
-                <input type="number" step=".01" id="price" placeholder="Enter price" required th:field="*{price}">
+                <p th:if="${#fields.hasErrors('imageUrl')}" th:errors="*{imageUrl}" class="text-warning">Error Text Here</p>
 
                 <button type="submit" class="auth-button">Add Game</button>
             </form>
@@ -50,7 +43,7 @@
 
     <!-- Footer -->
     <footer>
-        &copy; 2025 Pocket Entertainment. All rights reserved. | <a href="#">Contact us</a>
+        <p>© 2025 Pocket Entertainment. All Rights Reserved. | <a th:href="@{/contacts}" class="contact-link">Contact us</a></p>
     </footer>
 
 </body>

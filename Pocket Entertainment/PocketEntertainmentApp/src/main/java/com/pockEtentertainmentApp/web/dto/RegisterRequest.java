@@ -12,12 +12,12 @@ public class RegisterRequest {
     @Email
     private String email;
 
-    @NotBlank(message = "Username cannot be empty.")
-    @Size(min = 3, max = 20, message = "Username must be between 3 and 20 characters!")
+    @NotBlank(message = "Please enter your username.")
+    @Size(min = 3, max = 20, message = "Username must be between 3 and 20 symbols!")
     private String username;
 
-    @NotBlank(message = "Password cannot be empty.")
-    @Size(min = 3, max = 20, message = "Password must be between 3 and 20 characters!")
+    @NotBlank(message = "Please enter your password.")
+    @Size(min = 3, max = 20, message = "Password must be between 3 and 20 symbols!")
     private String password;
 
 

@@ -13,17 +13,10 @@
         <div class="nav-left">
             <a th:href="@{/home}" >
                 <button class="add-game">Home</button>
-            </a>
-            <a th:href="@{/add-game}" >
-                <button class="add-game">Add Game</button>
-            </a>
-            <a th:href="@{/cosmetics/add}" >
-                <button class="add-game">Add Cosmetic</button>
-            </a>
         </div>
-        <div class="auth-buttons">
+        <a th:href="@{/logout}" class="auth-buttons">
             <button class="logout">Log Out</button>
-        </div>
+        </a>
     </nav>
 
     <!-- Account Page Container -->
@@ -52,7 +45,7 @@
 
     <!-- Footer -->
     <footer>
-        &copy; 2025 Pocket Entertainment. All rights reserved. | <a href="#">Contact us</a>
+        <p>© 2025 Pocket Entertainment. All Rights Reserved. | <a th:href="@{/contacts}" class="contact-link">Contact us</a></p>
     </footer>
 
 </body>

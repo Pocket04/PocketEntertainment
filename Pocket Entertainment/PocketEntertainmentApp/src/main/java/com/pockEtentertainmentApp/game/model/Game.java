@@ -4,10 +4,7 @@ import com.pockEtentertainmentApp.cosmetic.model.Cosmetic;
 import com.pockEtentertainmentApp.user.model.User;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -19,6 +16,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
+@Setter
 public class Game {
 
     @Id
@@ -35,13 +33,13 @@ public class Game {
     @Column(nullable = false)
     private String imageUrl;
 
-    @Column(nullable = false)
-    private BigDecimal price;
-
     @OneToMany(mappedBy = "game")
     private List<Cosmetic> cosmetics;
 
     @ManyToOne
     private User creator;
+
+    @Column(nullable = false)
+    private int downloads;
 
 }

@@ -7,15 +7,23 @@ body {
 
 .navbar {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-between; /* Keeps nav items spaced out */
     align-items: center;
     background-color: #222;
     color: white;
     padding: 10px 20px;
+    position: relative;
 }
+
 .nav-left {
     display: flex;
     align-items: center;
+}
+
+.nav-center {
+    position: absolute; /* Positioning it in the center */
+    left: 50%;
+    transform: translateX(-50%); /* Offset by 50% to truly center */
 }
 
 button {
@@ -33,6 +41,15 @@ button {
     cursor: pointer;
     border-radius: 5px;
     margin-left: 20px; /* Adds spacing between logo and button */
+}
+
+.users {
+    background-color: #31ff00;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    justify-content: center; /* Adds spacing between logo and button */
 }
 
 .auth-buttons button {
@@ -54,11 +71,11 @@ button {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     width: 45%;
 }
+
 .profile-picture {
     width: 100px;
     height: 100px;
-    border-radius: 50%;
-    border: 2px solid #17a2b8;
+    border-radius: 7px;
 }
 
 h2 {
@@ -84,6 +101,7 @@ h2 {
     color: white;
     margin-top: 10px;
 }
+
 footer {
     position: fixed;
     bottom: 0;

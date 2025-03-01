@@ -2,6 +2,7 @@ package com.pockEtentertainmentApp.game.service;
 
 import com.pockEtentertainmentApp.game.model.Game;
 import com.pockEtentertainmentApp.game.repository.GameRepository;
+import com.pockEtentertainmentApp.user.model.User;
 import com.pockEtentertainmentApp.web.dto.AddGameRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,7 +20,7 @@ public class GameService {
         this.gameRepository = gameRepository;
     }
 
-    public void createGame(AddGameRequest addGameRequest) {
+    public void createGame(AddGameRequest addGameRequest, User user) {
 
         Optional<Game> optional = gameRepository.getGameByName(addGameRequest.getName());
 
@@ -31,7 +32,8 @@ public class GameService {
                 .name(addGameRequest.getName())
                 .description(addGameRequest.getDescription())
                 .imageUrl(addGameRequest.getImageUrl())
-                .price(addGameRequest.getPrice())
+                .creator(user)
+                .downloads(0)
                 .build();
 
         gameRepository.save(game);
@@ -40,6 +42,17 @@ public class GameService {
     public List<Game> getAllGames() {
 
         return gameRepository.findAll();
+    }
+    public void downloadGame(UUID gameId) {
+        Optional<Game> optional = gameRepository.getGameById(gameId);
+        if (optional.isEmpty()) {
+            throw new RuntimeException("Game with id " + gameId + " does not exist");
+        }
+
+        Game game = optional.get();
+        int downloads = game.getDownloads() + 1;
+        game.setDownloads(downloads);
+        gameRepository.save(game);
     }
 
     public Game getGameById(UUID id) {

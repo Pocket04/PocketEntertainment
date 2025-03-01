@@ -12,12 +12,6 @@
         <a th:href="@{/home}" >
             <button class="add-game">Home</button>
         </a>
-        <a th:href="@{/add-game}" >
-            <button class="add-game">Add Game</button>
-        </a>
-        <a th:href="@{/cosmetics/add}" >
-            <button class="add-game">Add Cosmetic</button>
-        </a>
 
     </div>
     <div class="auth-buttons">
@@ -31,18 +25,22 @@
     <div class="container">
         <div class="auth-box">
             <h2>Edit Profile</h2>
-            <form th:action="@{'/users/' + ${user.id} + '/profile'}" th:method="PATCH" th:object="${editAccountRequest}">
+            <form th:action="@{'/users/' + ${user.id} + '/profile'}" th:method="PUT" th:object="${editAccountRequest}">
                 <label for="profile-img">Profile Image URL:</label>
                 <input type="url" id="profile-img" placeholder="Enter profile image URL" th:field="*{profilePicture}">
+                <p th:if="${#fields.hasErrors('profilePicture')}" th:errors="*{profilePicture}" class="text-warning">Error Text Here</p>
 
                 <label for="first-name">First Name:</label>
                 <input type="text" id="first-name" placeholder="Enter your first name"  th:field="*{firstName}">
+                <p th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}" class="text-warning">Error Text Here</p>
 
                 <label for="last-name">Last Name:</label>
                 <input type="text" id="last-name" placeholder="Enter your last name"  th:field="*{lastName}">
+                <p th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}" class="text-warning">Error Text Here</p>
 
                 <label for="email">Email:</label>
                 <input type="email" id="email" placeholder="Enter your email"  th:field="*{email}">
+                <p th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="text-warning">Error Text Here</p>
 
                 <button type="submit" class="auth-button">Save Changes</button>
             </form>
@@ -51,7 +49,7 @@
 
     <!-- Footer -->
     <footer>
-        &copy; 2025 Pocket Entertainment. All rights reserved. | <a href="#">Contact us</a>
+        <p>© 2025 Pocket Entertainment. All Rights Reserved. | <a th:href="@{/contacts}" class="contact-link">Contact us</a></p>
     </footer>
 
 </body>

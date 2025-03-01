@@ -12,16 +12,16 @@ import java.util.UUID;
 @Data
 public class AddCosmeticRequest {
 
-    @NotBlank(message = "Name must not be blank!")
+    @NotBlank(message = "Please enter name.")
     private String name;
-    @NotBlank(message = "Image must not be blank!")
+    @NotBlank(message = "Must be a valid URL!")
     @URL
     private String imageUrl;
-    @NotBlank(message = "Description must not be blank!")
+    @NotBlank(message = "Please enter description.")
     private String description;
     @NotNull(message = "Please select a game!")
     private UUID game;
-    @NotNull(message = "Price must not be empty!")
+    @NotNull(message = "Please enter the price.")
     private BigDecimal price;
 
 

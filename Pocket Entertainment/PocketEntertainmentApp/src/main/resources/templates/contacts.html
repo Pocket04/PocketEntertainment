@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us</title>
+    <link rel="stylesheet" href="/css/loginRegisterStyle.css">
+</head>
+<body>
+<nav class="navbar">
+    <div class="nav-left">
+        <a th:href="@{/home}">
+            <button class="add-game">Home</button>
+        </a>
+    </div>
+    <div class="auth-buttons">
+        <a th:href="@{/logout}">
+            <button class="logout">Log Out</button>
+        </a>
+    </div>
+</nav>
+
+<!-- Contact Us Form Container -->
+<form class="container" th:action="@{/contacts}" th:method="POST">
+    <div class="auth-box">
+        <h2>Contact Us</h2>
+        <form>
+            <label for="full-name">Full Name:</label>
+            <input type="text" id="full-name" placeholder="Enter your full name" required>
+
+            <label for="email">Email Address:</label>
+            <input type="email" id="email" placeholder="Enter your email" required>
+
+            <label for="subject">Subject:</label>
+            <input type="email" id="subject" placeholder="Subject" required>
+
+            <label for="message">Message:</label>
+            <textarea id="message" placeholder="Enter your message" required></textarea>
+
+            <button type="submit" class="auth-button">Send Message</button>
+        </form>
+    </div>
+</form>
+
+<!-- Footer -->
+<footer>
+    <p>© 2025 Pocket Entertainment. All Rights Reserved. | <a th:href="@{/contacts}" class="contact-link">Contact us</a></p>
+</footer>
+
+</body>
+</html>

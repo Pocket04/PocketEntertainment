@@ -150,7 +150,7 @@ footer a:hover {
     width: 100px;
     height: 100px;
     border-radius: 50%;
-    border: 2px solid #17a2b8;
+    border: 2px solid rgba(51, 56, 69, 0.62);
 }
 
 /* User Info */

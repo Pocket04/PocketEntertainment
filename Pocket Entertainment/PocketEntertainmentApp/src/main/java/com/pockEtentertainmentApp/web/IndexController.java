@@ -15,6 +15,7 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -61,6 +62,7 @@ public class IndexController {
         mav.addObject("cosmetics", cosmetics);
         return mav;
     }
+
     @GetMapping("/login")
     public ModelAndView loginPage(@RequestParam(value = "error", required = false) String errorParam) {
         ModelAndView modelAndView = new ModelAndView();
@@ -97,26 +99,18 @@ public class IndexController {
 
         return "redirect:/login";
     }
-    @GetMapping("/add-game")
-    public ModelAndView addGame(@AuthenticationPrincipal AuthenticationMetadata authenticationMetadata) {
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("add-game");
-        modelAndView.addObject("addGameRequest", new AddGameRequest());
 
-        return modelAndView;
-    }
-    @PostMapping("/add-game")
-    public String addGame(@Valid AddGameRequest addGameRequest, BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
-            return "add-game";
-        }
-        gameService.createGame(addGameRequest);
-        return "redirect:/home";
-    }
     @GetMapping("/planet-of-peace")
     public ModelAndView planetOfPeace(@AuthenticationPrincipal AuthenticationMetadata authenticationMetadata) {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("POP");
+        return modelAndView;
+    }
+
+    @GetMapping("/contacts")
+    public ModelAndView contacts() {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("contacts");
         return modelAndView;
     }
 

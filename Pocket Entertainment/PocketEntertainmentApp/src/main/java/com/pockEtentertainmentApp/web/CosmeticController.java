@@ -7,6 +7,7 @@ import com.pockEtentertainmentApp.game.service.GameService;
 import com.pockEtentertainmentApp.web.dto.AddCosmeticRequest;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -31,6 +32,7 @@ public class CosmeticController {
 
 
     @GetMapping("/add")
+    @PreAuthorize("hasRole('ADMIN')")
     public ModelAndView addCosmeticForm() {
 
         List<Game> games = gameService.getAllGames();
@@ -43,6 +45,7 @@ public class CosmeticController {
     }
 
     @PostMapping("/add")
+    @PreAuthorize("hasRole('ADMIN')")
     public String addCosmetic(@Valid AddCosmeticRequest addCosmeticRequest, BindingResult bindingResult) {
 
         if (bindingResult.hasErrors()) {

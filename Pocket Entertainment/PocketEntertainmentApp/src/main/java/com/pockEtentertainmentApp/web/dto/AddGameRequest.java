@@ -11,7 +11,7 @@ import java.math.BigDecimal;
 @Data
 public class AddGameRequest {
 
-    @NotBlank(message = "Name must not be blank!")
+    @NotBlank(message = "Please enter the name.")
     @Size(min = 1, max = 50, message = "Name must be between 1 and 50 symbols!")
     private String name;
 
@@ -19,13 +19,8 @@ public class AddGameRequest {
     @Size(min = 1, max = 100, message = "Description must be between 1 and 100 symbols!")
     private String description;
 
-    @URL
-    @NotBlank(message = "Image must not be blank!")
+    @URL(message = "Must be a valid URL!")
+    @NotBlank(message = "Please enter an image URL.")
     private String imageUrl;
-
-    @NotNull(message = "Price must not be empty!")
-    private BigDecimal price;
-
-
 
 }

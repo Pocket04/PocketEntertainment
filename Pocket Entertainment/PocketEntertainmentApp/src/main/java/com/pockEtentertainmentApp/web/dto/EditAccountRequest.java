@@ -15,7 +15,7 @@ import org.hibernate.validator.constraints.URL;
 @AllArgsConstructor
 public class EditAccountRequest {
 
-    @URL
+    @URL(message = "Must be a valid URL!")
     private String profilePicture;
 
     @Size(min = 2, max = 50, message = "First name must be between 2 and 50 symbols!")
@@ -24,7 +24,7 @@ public class EditAccountRequest {
     @Size(min = 2, max = 50, message = "First name must be between 2 and 50 symbols!")
     private String lastName;
 
-    @Email
+    @Email(message = "Please enter your email.")
     private String email;
 
 }
