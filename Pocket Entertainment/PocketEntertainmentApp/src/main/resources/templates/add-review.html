@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us</title>
+    <link rel="stylesheet" href="/css/loginRegisterStyle.css">
+</head>
+<body>
+<nav class="navbar">
+    <div class="nav-left">
+        <a th:href="@{/home}">
+            <button class="add-game">Home</button>
+        </a>
+        <a th:href="@{/reviews}">
+            <button class="add-game">Reviews</button>
+        </a>
+    </div>
+    <div class="auth-buttons">
+        <a th:href="@{/logout}">
+            <button class="logout">Log Out</button>
+        </a>
+    </div>
+</nav>
+
+<!-- Contact Us Form Container -->
+<form class="container" th:action="@{/reviews/add}" th:method="POST" th:object="${addReviewRequest}">
+    <div class="auth-box">
+        <h2>What do you think about the game?</h2>
+        <form>
+            <label for="game">Game:</label>
+            <select id="game" required th:field="*{game}">
+                <option th:each="igame : ${games}" th:text="${igame.name}" th:value="${igame.id}"></option>
+            </select>
+            <p th:if="${#fields.hasErrors('game')}" th:errors="*{game}" class="text-warning">Error Text Here</p>
+
+            <label for="subject">Rating:</label>
+            <div class="star-rating" id="subject">
+                <input type="radio" id="star10" name="rating" value="10" th:checked="*{rating == 10}"><label for="star10">★</label>
+                <input type="radio" id="star9" name="rating" value="9" th:checked="*{rating == 9}"><label for="star9">★</label>
+                <input type="radio" id="star8" name="rating" value="8" th:checked="*{rating == 8}"><label for="star8">★</label>
+                <input type="radio" id="star7" name="rating" value="7" th:checked="*{rating == 7}"><label for="star7">★</label>
+                <input type="radio" id="star6" name="rating" value="6" th:checked="*{rating == 6}"><label for="star6">★</label>
+                <input type="radio" id="star5" name="rating" value="5" th:checked="*{rating == 5}"><label for="star5">★</label>
+                <input type="radio" id="star4" name="rating" value="4" th:checked="*{rating == 4}"><label for="star4">★</label>
+                <input type="radio" id="star3" name="rating" value="3" th:checked="*{rating == 3}"><label for="star3">★</label>
+                <input type="radio" id="star2" name="rating" value="2" th:checked="*{rating == 2}"><label for="star2">★</label>
+                <input type="radio" id="star1" name="rating" value="1" th:checked="*{rating == 1}"><label for="star1">★</label>
+            </div>
+            <p th:if="${#fields.hasErrors('rating')}" th:errors="*{rating}" class="text-warning">Error Text Here</p>
+
+            <label for="description">Review:</label>
+            <textarea id="description" placeholder="Enter game description" required th:field="*{body}"></textarea>
+            <p th:if="${#fields.hasErrors('body')}" th:errors="*{body}" class="text-warning">Error Text Here</p>
+
+            <button type="submit" class="auth-button">Leave Review</button>
+        </form>
+    </div>
+</form>
+
+<!-- Footer -->
+<footer>
+    <p>© 2025 Pocket Entertainment. All Rights Reserved. | <a th:href="@{/contacts}" class="contact-link">Contact us</a></p>
+</footer>
+
+</body>
+</html>

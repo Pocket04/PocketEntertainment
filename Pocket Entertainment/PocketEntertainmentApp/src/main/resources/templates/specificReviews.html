@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Company Reviews</title>
+    <link rel="stylesheet" href="/css/reviewsStyle.css">
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar">
+    <div class="nav-left">
+        <a th:href="@{/home}">
+            <button class="add-game">Home</button>
+        </a>
+        <a th:href="@{/reviews/add}" >
+            <button class="add-game">Add Review</button>
+        </a>
+    </div>
+    <div class="auth-buttons">
+        <a th:href="@{/logout}">
+            <button class="logout">Log Out</button>
+        </a>
+    </div>
+</nav>
+
+<!-- Reviews Section -->
+<div class="container">
+    <div class="auth-box">
+        <h2>What Our Users Say</h2>
+        <form class="specific" th:action="@{/reviews/specific}" th:method="GET">
+            <label for="gameselect">Select a game:</label>
+            <select name="gameId" id="gameselect">
+                <option value="">Select a game</option>
+                <option th:each="game : ${games}" th:value="${game.id}" th:text="${game.name}"></option>
+            </select>
+            <button type="submit">Go</button>
+        </form>
+        <ul class="reviews-list">
+            <li th:each="review : ${reviews}" class="review">
+                <div class="review-content">
+                    <img th:src="${#strings.isEmpty(review.user.profilePicture) ? 'https://goodwillsv.org/wp-content/uploads/2018/10/profile-pic-missing-default.jpg' : review.user.profilePicture}">
+                    <div class="column">
+                        <h3 th:text="${review.user.username}">GamingPro22</h3>
+                        <p th:text="${review.game.name}"></p>
+                        <span th:each="i : ${#numbers.sequence(1, review.rating)}" class="star-filled">★</span>
+                    </div>
+                </div>
+                <div class="review-content">
+                    <p class="text" th:text="${review.body}"></p>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<footer>
+    <p>© 2025 Pocket Entertainment. All Rights Reserved. | <a th:href="@{/contacts}" class="contact-link">Contact us</a></p>
+</footer>
+
+</body>
+</html>

@@ -46,14 +46,18 @@ public class CosmeticController {
 
     @PostMapping("/add")
     @PreAuthorize("hasRole('ADMIN')")
-    public String addCosmetic(@Valid AddCosmeticRequest addCosmeticRequest, BindingResult bindingResult) {
+    public ModelAndView addCosmetic(@Valid AddCosmeticRequest addCosmeticRequest, BindingResult bindingResult) {
 
         if (bindingResult.hasErrors()) {
-            return "add-cosmetic";
+            List<Game> games = gameService.getAllGames();
+            ModelAndView modelAndView = new ModelAndView();
+            modelAndView.setViewName("add-cosmetic");
+            modelAndView.addObject("games", games);
+            return modelAndView;
         }
 
         cosmeticService.addCosmetic(addCosmeticRequest);
 
-        return "redirect:/home";
+        return new ModelAndView("redirect:/home");
     }
 }

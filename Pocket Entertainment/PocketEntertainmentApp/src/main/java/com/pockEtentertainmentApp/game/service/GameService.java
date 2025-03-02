@@ -2,6 +2,7 @@ package com.pockEtentertainmentApp.game.service;
 
 import com.pockEtentertainmentApp.game.model.Game;
 import com.pockEtentertainmentApp.game.repository.GameRepository;
+import com.pockEtentertainmentApp.review.model.Review;
 import com.pockEtentertainmentApp.user.model.User;
 import com.pockEtentertainmentApp.web.dto.AddGameRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,7 @@ public class GameService {
     public GameService(GameRepository gameRepository) {
         this.gameRepository = gameRepository;
     }
+
 
     public void createGame(AddGameRequest addGameRequest, User user) {
 

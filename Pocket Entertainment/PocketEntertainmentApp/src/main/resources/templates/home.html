@@ -12,6 +12,9 @@
             <a th:href="@{/planet-of-peace}" >
                 <button class="add-game">Planet of Peace</button>
             </a>
+            <a th:href="@{/reviews}">
+                <button class="add-game">Reviews</button>
+            </a>
             <a th:if="${'ADMIN'.equals(user.role.toString())}" th:href="@{/games/add-game}" >
                 <button class="add-game">Add Game</button>
             </a>
@@ -42,11 +45,13 @@
             <ul>
                 <li th:each="game : ${games}" class="game-item">
                     <img class="profile-picture" th:src="${game.imageUrl}">
-                    <h2 th:text="${game.name}"></h2>
-                    <p th:text="${game.description}"></p>
-                        <a th:href="@{/files/virus-computer.gif}" th:download="virus-computer.gif">
-                            <button class="refund">Download</button>
-                        </a>
+                    <h2 class="text" th:text="${game.name}"></h2>
+                    <p th:if="${'ADMIN'.equals(user.role.toString())}" th:text="${game.creator.username}"></p>
+                    <hr>
+                    <p class="text" th:text="${game.description}"></p>
+                    <a th:href="@{/files/virus-computer.gif}" th:download="virus-computer.gif">
+                        <button class="refund">Download</button>
+                    </a>
                 </li>
             </ul>
         </div>
@@ -58,7 +63,7 @@
                     <img class="profile-picture" th:src="${cosmetic.imageUrl}">
                     <h2 th:text="${cosmetic.name}"></h2>
                     <h3 th:text="${cosmetic.game.name}"></h3>
-                    <p th:text="${cosmetic.description}"></p>
+                    <p class="text" th:text="${cosmetic.description}"></p>
                     <p th:text="${cosmetic.price} + '$'" class="price"></p>
                     <button class="refund">Buy Cosmetic</button>
                 </li>

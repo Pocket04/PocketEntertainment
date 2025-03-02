@@ -62,7 +62,8 @@ html, body {
     max-width: 800px;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
     border-radius: 10px;
-    text-align: center;
+    text-align: left;
+    flex-direction: column;
 }
 
 /* Reviews List */
@@ -72,7 +73,9 @@ html, body {
 
 /* Individual Review */
 .review {
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
     align-items: center;
     background: #f8f9fa;
     padding: 15px;
@@ -86,24 +89,41 @@ html, body {
     height: 50px;
     border-radius: 50%;
     margin-right: 15px;
+
+}
+.review-content{
+    display: flex;
 }
 
 .review-content h3 {
+    text-align: left;
     margin: 0;
     font-size: 18px;
     color: #333;
 }
+.column{
+    flex-direction: column;
+}
 
+form{
+    padding-left: 40px;
+}
 .review-content p {
+    text-align: left;
     margin: 5px 0;
     color: #555;
     font-size: 14px;
+    width: 645px;
+    word-wrap: break-word;
 }
 
 /* Star Rating */
 .stars {
     color: #f1c40f;
     font-size: 18px;
+}
+h2 {
+    text-align: center;
 }
 
 /* Footer */

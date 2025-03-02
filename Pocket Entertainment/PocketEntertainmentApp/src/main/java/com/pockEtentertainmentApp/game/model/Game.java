@@ -1,12 +1,12 @@
 package com.pockEtentertainmentApp.game.model;
 
 import com.pockEtentertainmentApp.cosmetic.model.Cosmetic;
+import com.pockEtentertainmentApp.review.model.Review;
 import com.pockEtentertainmentApp.user.model.User;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
 import lombok.*;
 
-import java.math.BigDecimal;
 import java.util.List;
 import java.util.UUID;
 

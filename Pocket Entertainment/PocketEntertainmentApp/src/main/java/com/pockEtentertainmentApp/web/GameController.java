@@ -53,7 +53,7 @@ public class GameController {
 
     @PostMapping("/add-game")
     @PreAuthorize("hasRole('ADMIN')")
-    public String addGame(@Valid AddGameRequest addGameRequest, @AuthenticationPrincipal AuthenticationMetadata authenticationMetadata, BindingResult bindingResult) {
+    public String addGame(@Valid AddGameRequest addGameRequest,BindingResult bindingResult, @AuthenticationPrincipal AuthenticationMetadata authenticationMetadata) {
         if (bindingResult.hasErrors()) {
             return "add-game";
         }

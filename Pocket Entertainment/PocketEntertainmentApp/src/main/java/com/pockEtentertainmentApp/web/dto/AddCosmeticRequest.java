@@ -3,6 +3,7 @@ package com.pockEtentertainmentApp.web.dto;
 import com.pockEtentertainmentApp.game.model.Game;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.Data;
 import org.hibernate.validator.constraints.URL;
 
@@ -18,6 +19,7 @@ public class AddCosmeticRequest {
     @URL
     private String imageUrl;
     @NotBlank(message = "Please enter description.")
+    @Size(min = 1, max = 50, message = "Must be between 1 and 50 symbols!")
     private String description;
     @NotNull(message = "Please select a game!")
     private UUID game;

@@ -16,7 +16,7 @@ public class AddGameRequest {
     private String name;
 
     @NotBlank(message = "Description must not be blank!")
-    @Size(min = 1, max = 100, message = "Description must be between 1 and 100 symbols!")
+    @Size(min = 1, max = 90, message = "Description must be between 1 and 90 symbols!")
     private String description;
 
     @URL(message = "Must be a valid URL!")

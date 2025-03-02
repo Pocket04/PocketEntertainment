@@ -11,14 +11,17 @@
     <!-- Navbar -->
     <nav class="navbar">
         <div class="nav-left">
-            <div class="logo">Pocket Entertainment</div>
-            <button class="add-game">Add Game</button>
-            <button class="add-game">Add Cosmetic</button>
+            <a th:href="@{/home}">
+                <button class="add-game">Home</button>
+            </a>
+            <a th:href="@{/reviews/add}" >
+                <button class="add-game">Add Review</button>
+            </a>
         </div>
         <div class="auth-buttons">
-            <button class="register">Register</button>
-            <button class="login">Log In</button>
-            <button class="logout">Log Out</button>
+            <a th:href="@{/logout}">
+                <button class="logout">Log Out</button>
+            </a>
         </div>
     </nav>
 
@@ -26,40 +29,30 @@
     <div class="container">
         <div class="auth-box">
             <h2>What Our Users Say</h2>
-            <div class="reviews-list">
-                
-                <!-- Review 1 -->
-                <div class="review">
-                    <img src="https://via.placeholder.com/50" alt="User Profile">
+            <form th:action="@{/reviews/specific}" th:method="GET">
+                <label for="gameselect">Select a game:</label>
+                <select name="gameId" id="gameselect">
+                    <option value="">Select a game</option>
+                    <option th:each="game : ${games}" th:value="${game.id}" th:text="${game.name}"></option>
+                </select>
+                <button type="submit">Go</button>
+            </form>
+
+            <ul class="reviews-list">
+                <li th:each="review : ${reviews}" class="review">
                     <div class="review-content">
-                        <h3>JohnDoe</h3>
-                        <div class="stars">★★★★★</div>
-                        <p>Amazing platform! The games are fantastic, and the interface is very user-friendly.</p>
+                        <img th:src="${#strings.isEmpty(review.user.profilePicture) ? 'https://goodwillsv.org/wp-content/uploads/2018/10/profile-pic-missing-default.jpg' : review.user.profilePicture}">
+                        <div class="column">
+                            <h3 th:text="${review.user.username}">GamingPro22</h3>
+                            <p th:text="${review.game.name}"></p>
+                            <span th:each="i : ${#numbers.sequence(1, review.rating)}" class="star-filled">★</span>
+                        </div>
                     </div>
-                </div>
-
-                <!-- Review 2 -->
-                <div class="review">
-                    <img src="https://via.placeholder.com/50" alt="User Profile">
                     <div class="review-content">
-                        <h3>JaneSmith</h3>
-                        <div class="stars">★★★★★</div>
-                        <p>Incredible customer service and a great selection of games. Highly recommended!</p>
+                        <p class="text" th:text="${review.body}"></p>
                     </div>
-                </div>
-
-                <!-- Review 3 -->
-                <div class="review">
-                    <img src="https://via.placeholder.com/50" alt="User Profile">
-                    <div class="review-content">
-                        <h3>GamingPro22</h3>
-                        <div class="stars">★★★★★</div>
-                        <p>Best gaming experience I’ve had in years! Love the easy-to-use design and quick support.</p>
-                    </div>
-                </div>
-
-
-            </div>
+                </li>
+            </ul>
         </div>
     </div>
 

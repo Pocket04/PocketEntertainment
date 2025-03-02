@@ -147,5 +147,34 @@ footer a:hover {
     display: block;
     margin: 10px auto;
 }
+.star-rating {
+    display: flex; /* This makes the stars display horizontally */
+    font-size: 1.5rem;  /* Smaller star size */
+    justify-content: center; /* Center the stars horizontally */
+    direction: rtl;
+}
+
+.star-rating input {
+    display: none; /* Hide the radio buttons */
+}
+
+.star-rating label {
+    font-size: 1.5rem;  /* Adjust this value to change the star size */
+    color: lightgray;
+    cursor: pointer;
+    margin: 0 5px; /* Space out the stars */
+}
+
+.star-rating input:checked ~ label {
+    color: orangered;
+}
+
+.star-rating input:hover ~ label,
+.star-rating input:checked ~ label:hover {
+    color: darkorange;
+}
+
+
+
 
 
