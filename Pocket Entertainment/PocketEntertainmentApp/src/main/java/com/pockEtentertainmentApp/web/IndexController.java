@@ -1,5 +1,6 @@
 package com.pockEtentertainmentApp.web;
 
+import com.pockEtentertainmentApp.cosmetic.model.BoughtCosmetic;
 import com.pockEtentertainmentApp.cosmetic.model.Cosmetic;
 import com.pockEtentertainmentApp.cosmetic.service.CosmeticService;
 import com.pockEtentertainmentApp.game.model.Game;
@@ -7,25 +8,21 @@ import com.pockEtentertainmentApp.game.service.GameService;
 import com.pockEtentertainmentApp.security.AuthenticationMetadata;
 import com.pockEtentertainmentApp.user.model.User;
 import com.pockEtentertainmentApp.user.service.UserService;
-import com.pockEtentertainmentApp.web.dto.AddGameRequest;
+import com.pockEtentertainmentApp.wallet.model.Wallet;
+import com.pockEtentertainmentApp.wallet.service.WalletService;
 import com.pockEtentertainmentApp.web.dto.LoginRequest;
 import com.pockEtentertainmentApp.web.dto.RegisterRequest;
-import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
 
 @Controller
 public class IndexController {
@@ -52,7 +49,9 @@ public class IndexController {
 
         User user = userService.getUserById(authenticationMetadata.getId());
         List<Game> games = gameService.getAllGames();
-        List<Cosmetic> cosmetics = cosmeticService.getallCosmtics();
+        List<Cosmetic> cosmetics = cosmeticService.getAllCosmetics(authenticationMetadata.getId());
+        List<BoughtCosmetic> boughtCosmetics = cosmeticService.getAllBoughtCosmetics(user);
+        List<Wallet> wallets = user.getWallets();
 
 
         ModelAndView mav = new ModelAndView();
@@ -60,6 +59,9 @@ public class IndexController {
         mav.addObject("user", user);
         mav.addObject("games", games);
         mav.addObject("cosmetics", cosmetics);
+        mav.addObject("boughtCosmetics", boughtCosmetics);
+        mav.addObject("wallets", wallets);
+        mav.addObject("showModal", false);
         return mav;
     }
 

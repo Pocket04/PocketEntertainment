@@ -42,8 +42,8 @@
                     <tr th:each="user : ${users}">
                         <td><img id="profile-img" th:src="${#strings.isEmpty(user.profilePicture) ? 'https://goodwillsv.org/wp-content/uploads/2018/10/profile-pic-missing-default.jpg' : user.profilePicture}"></td>
                         <td th:text="${user.username}"></td>
-                        <td th:text="${#strings.isEmpty(user.firstName) ? 'No first name set.' : user.firstName}">----</td>
-                        <td th:text="${#strings.isEmpty(user.lastName) ? 'No first name set.' : user.lastName}">----</td>
+                        <td th:text="${#strings.isEmpty(user.firstName) ? 'No first name.' : user.firstName}">----</td>
+                        <td th:text="${#strings.isEmpty(user.lastName) ? 'No last name.' : user.lastName}">----</td>
                         <td th:text="${user.email}"></td>
                         <td th:text="${user.role}" class="role"></td>
                         <td>

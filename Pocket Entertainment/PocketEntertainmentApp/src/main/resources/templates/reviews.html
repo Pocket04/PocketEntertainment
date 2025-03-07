@@ -29,7 +29,7 @@
     <div class="container">
         <div class="auth-box">
             <h2>What Our Users Say</h2>
-            <form th:action="@{/reviews/specific}" th:method="GET">
+            <form th:if="${!reviews.isEmpty()}" th:action="@{/reviews/specific}" th:method="GET">
                 <label for="gameselect">Select a game:</label>
                 <select name="gameId" id="gameselect">
                     <option value="">Select a game</option>
@@ -37,6 +37,8 @@
                 </select>
                 <button type="submit">Go</button>
             </form>
+
+            <h3 th:if = "${reviews.isEmpty()}">Be the first one to add a review!</h3>
 
             <ul class="reviews-list">
                 <li th:each="review : ${reviews}" class="review">

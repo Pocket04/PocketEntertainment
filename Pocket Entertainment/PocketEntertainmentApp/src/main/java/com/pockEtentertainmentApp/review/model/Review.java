@@ -33,7 +33,7 @@ public class Review {
     private Game game;
 
     @ManyToOne
-    @JoinColumn(name = "user_id", columnDefinition = "BINARY(16)", nullable = false)
+    @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
     @Column(nullable = false, updatable = false)

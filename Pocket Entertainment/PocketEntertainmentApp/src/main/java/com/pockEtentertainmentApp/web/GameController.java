@@ -5,8 +5,10 @@ import com.pockEtentertainmentApp.security.AuthenticationMetadata;
 import com.pockEtentertainmentApp.user.model.User;
 import com.pockEtentertainmentApp.user.service.UserService;
 import com.pockEtentertainmentApp.web.dto.AddGameRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -17,6 +19,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.UUID;
 
 @Controller
@@ -33,11 +37,15 @@ public class GameController {
     }
 
     @PostMapping("/{gameId}")
-    public String downloadGame(@PathVariable UUID gameId){
+    public void downloadGame(@PathVariable UUID gameId, HttpServletResponse response){
+
+        Path path = Paths.get("/files/virus-computer.gif");
+
+        response.setContentType("image/gif");
+        response.setContentLengthLong(path.toFile().length());
+        response.setHeader("Content-Disposition", "attachment; filename=\"virus-computer.gif\"");
 
         gameService.downloadGame(gameId);
-
-        return "redirect:/home";
     }
 
     @GetMapping("/add-game")

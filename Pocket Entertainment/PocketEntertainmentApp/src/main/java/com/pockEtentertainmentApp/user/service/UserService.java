@@ -4,6 +4,9 @@ import com.pockEtentertainmentApp.security.AuthenticationMetadata;
 import com.pockEtentertainmentApp.user.model.Role;
 import com.pockEtentertainmentApp.user.model.User;
 import com.pockEtentertainmentApp.user.repository.UserRepository;
+import com.pockEtentertainmentApp.wallet.model.Currency;
+import com.pockEtentertainmentApp.wallet.model.Wallet;
+import com.pockEtentertainmentApp.wallet.service.WalletService;
 import com.pockEtentertainmentApp.web.dto.EditAccountRequest;
 import com.pockEtentertainmentApp.web.dto.LoginRequest;
 import com.pockEtentertainmentApp.web.dto.RegisterRequest;
@@ -23,11 +26,13 @@ public class UserService implements UserDetailsService {
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
+    private final WalletService walletService;
 
     @Autowired
-    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
+    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, WalletService walletService) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
+        this.walletService = walletService;
     }
 
     public void registerUser(RegisterRequest registerRequest){
@@ -43,11 +48,21 @@ public class UserService implements UserDetailsService {
                 .email(registerRequest.getEmail())
                 .password(passwordEncoder.encode(registerRequest.getPassword()))
                 .isActive(true)
-                .role(Role.ADMIN)
                 .build();
+
+        if (!getAllUsers().isEmpty()){
+            user.setRole(Role.USER);
+        }else {
+            user.setRole(Role.ADMIN);
+        }
 
 
         userRepository.save(user);
+
+        walletService.createWallet(user, Currency.POCKET_TOKEN);
+        walletService.createWallet(user,Currency.EURO);
+
+
     }
 
     public User getUserById(UUID uuid) {

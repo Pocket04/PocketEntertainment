@@ -89,6 +89,20 @@ html, body {
     border-radius: 50%;
 }
 
+.currency {
+    display: flex;
+    flex-direction: row;
+    height: 40px;
+}
+
+.currency button{
+    margin-left: 5px;
+}
+
+.horizon {
+    height: 35px;
+}
+
 /* Change Role Button */
 .role-button {
     background-color: #e91e63;

@@ -1,8 +1,10 @@
 package com.pockEtentertainmentApp.user.model;
 
+import com.pockEtentertainmentApp.cosmetic.model.BoughtCosmetic;
 import com.pockEtentertainmentApp.cosmetic.model.Cosmetic;
 import com.pockEtentertainmentApp.game.model.Game;
 import com.pockEtentertainmentApp.review.model.Review;
+import com.pockEtentertainmentApp.wallet.model.Wallet;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.validator.constraints.URL;
@@ -45,5 +47,8 @@ public class User {
     private Role role;
 
     private boolean isActive;
+
+    @OneToMany(mappedBy = "owner")
+    private List<Wallet> wallets;
 
 }

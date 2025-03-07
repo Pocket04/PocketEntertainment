@@ -51,6 +51,45 @@ button {
     border-radius: 5px;
     justify-content: center; /* Adds spacing between logo and button */
 }
+.auth-buttons {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end; /* Aligns everything to the right */
+    margin-left: 20px; /* Adjust this value to create space between the currencies and the logout button */
+}
+
+.currency-container {
+    display: flex;
+    align-items: center;
+    margin-right: 20px; /* Space between the currencies and the logout button */
+}
+
+.currency-item {
+    display: flex;
+    align-items: center;
+    margin-right: 10px; /* Space between each currency */
+}
+
+.currency-icon {
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
+    border-radius: 50%;
+}
+
+.buy-currency {
+    font-size: 20px;
+    background-color: #4CAF50; /* Green color for the button */
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.buy-currency:hover {
+    background-color: #45a049; /* Darker green on hover */
+}
 
 .auth-buttons button {
     background-color: #d63384;
@@ -70,7 +109,6 @@ button {
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     width: 45%;
-    list-style-type: none;
 }
 .text{
     word-wrap: break-word;
@@ -93,6 +131,8 @@ h2 {
     margin: 10px 0;
     border-radius: 5px;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    list-style-type: none;
+
 }
 
 .price {
