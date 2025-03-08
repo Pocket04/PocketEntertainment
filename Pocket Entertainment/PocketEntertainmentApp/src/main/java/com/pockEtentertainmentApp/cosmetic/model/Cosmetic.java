@@ -4,10 +4,7 @@ import com.pockEtentertainmentApp.game.model.Game;
 import com.pockEtentertainmentApp.user.model.User;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.validator.constraints.URL;
 
 import java.math.BigDecimal;
@@ -18,6 +15,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
+@Setter
 public class Cosmetic {
 
     @Id
@@ -40,4 +38,7 @@ public class Cosmetic {
 
     @Column(nullable = false)
     private BigDecimal price;
+
+    @Column(nullable = false)
+    private long purchases;
 }

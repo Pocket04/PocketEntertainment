@@ -51,4 +51,7 @@ public class User {
     @OneToMany(mappedBy = "owner")
     private List<Wallet> wallets;
 
+    @Column(nullable = false)
+    private int refundCount = 0;
+
 }

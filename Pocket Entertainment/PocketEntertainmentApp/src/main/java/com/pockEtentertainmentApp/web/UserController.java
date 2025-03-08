@@ -1,12 +1,18 @@
 package com.pockEtentertainmentApp.web;
 
+import com.pockEtentertainmentApp.security.AuthenticationMetadata;
 import com.pockEtentertainmentApp.user.model.User;
 import com.pockEtentertainmentApp.user.service.UserService;
+import com.pockEtentertainmentApp.wallet.model.Wallet;
+import com.pockEtentertainmentApp.wallet.service.WalletService;
 import com.pockEtentertainmentApp.web.dto.EditAccountRequest;
 import com.pockEtentertainmentApp.web.mapper.DtoMapper;
 import jakarta.validation.Valid;
+import org.hibernate.boot.Metadata;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -19,20 +25,26 @@ import java.util.UUID;
 @RequestMapping("/users")
 public class UserController {
     private final UserService userService;
+    private final WalletService walletService;
 
     @Autowired
-    public UserController(UserService userService) {
+    public UserController(UserService userService, WalletService walletService) {
         this.userService = userService;
+        this.walletService = walletService;
     }
 
     @GetMapping("")
     @PreAuthorize("hasRole('ADMIN')")
-    public ModelAndView users() {
+    public ModelAndView users(@AuthenticationPrincipal AuthenticationMetadata metadata) {
         List<User> users = userService.getAllUsers();
+        User user = userService.getUserById(metadata.getId());
+        List<Wallet> wallets = user.getWallets();
 
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("users");
         modelAndView.addObject("users", users);
+        modelAndView.addObject("wallets", wallets);
+        modelAndView.addObject("user", user);
         return modelAndView;
     }
 

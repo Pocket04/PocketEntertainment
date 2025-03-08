@@ -52,7 +52,7 @@ public class GameService {
         }
 
         Game game = optional.get();
-        int downloads = game.getDownloads() + 1;
+        long downloads = game.getDownloads() + 1;
         game.setDownloads(downloads);
         gameRepository.save(game);
     }

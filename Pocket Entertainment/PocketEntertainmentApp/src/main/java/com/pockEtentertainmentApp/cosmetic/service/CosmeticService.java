@@ -6,10 +6,16 @@ import com.pockEtentertainmentApp.cosmetic.repository.BoughtCosmeticRepository;
 import com.pockEtentertainmentApp.cosmetic.repository.CosmeticRepository;
 import com.pockEtentertainmentApp.game.service.GameService;
 import com.pockEtentertainmentApp.user.model.User;
+import com.pockEtentertainmentApp.wallet.model.Currency;
+import com.pockEtentertainmentApp.wallet.model.Wallet;
+import com.pockEtentertainmentApp.wallet.repository.WalletRepository;
+import com.pockEtentertainmentApp.wallet.service.WalletService;
 import com.pockEtentertainmentApp.web.dto.AddCosmeticRequest;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.UUID;
 
@@ -19,12 +25,16 @@ public class CosmeticService {
     private final CosmeticRepository cosmeticRepository;
     private final GameService gameService;
     private final BoughtCosmeticRepository boughtCosmeticRepository;
+    private final WalletService walletService;
+    private final WalletRepository walletRepository;
 
     @Autowired
-    public CosmeticService(CosmeticRepository cosmeticRepository, GameService gameService, BoughtCosmeticRepository boughtCosmeticRepository) {
+    public CosmeticService(CosmeticRepository cosmeticRepository, GameService gameService, BoughtCosmeticRepository boughtCosmeticRepository, WalletService walletService, WalletRepository walletRepository) {
         this.cosmeticRepository = cosmeticRepository;
         this.gameService = gameService;
         this.boughtCosmeticRepository = boughtCosmeticRepository;
+        this.walletService = walletService;
+        this.walletRepository = walletRepository;
     }
 
     public void addCosmetic(AddCosmeticRequest request) {
@@ -49,7 +59,8 @@ public class CosmeticService {
         return cosmeticRepository.findById(id).orElseThrow(() -> new RuntimeException("Cosmetic not found"));
     }
 
-    public void createBoughtCosmetic(Cosmetic cosmetic, User user) {
+    @Transactional
+    public void buyCosmetic(Cosmetic cosmetic, User user) {
 
         BoughtCosmetic boughtCosmetic = BoughtCosmetic.builder()
                 .name(cosmetic.getName())
@@ -61,15 +72,39 @@ public class CosmeticService {
                 .user(user)
                 .build();
 
+        cosmetic.setPurchases(cosmetic.getPurchases() + 1);
+        cosmeticRepository.save(cosmetic);
 
+        Wallet wallet = walletService.findWalletByCurrencyAndOwner(Currency.POCKET_TOKEN, user);
+
+        wallet.setBalance(wallet.getBalance().subtract(cosmetic.getPrice()));
+        walletService.saveWallet(wallet);
         boughtCosmeticRepository.save(boughtCosmetic);
 
+        if (wallet.getBalance().compareTo(BigDecimal.ZERO) <= 0){
+            throw new RuntimeException("Not enough Pocket Tokens!");
+        }
     }
 
     public List<BoughtCosmetic> getAllBoughtCosmetics(User user) {
         return boughtCosmeticRepository.findByUser(user);
     }
-    public void deleteBoughtCosmetic(UUID id) {
+
+    @Transactional
+    public void refundCosmetic(UUID id) {
+        BoughtCosmetic boughtCosmetic = boughtCosmeticRepository.getBoughtCosmeticById(id);
+
+        User user = boughtCosmetic.getUser();
+
+        if (user.getRefundCount() >= 3){
+            throw new RuntimeException("No refunds left!");
+        }
+        user.setRefundCount(user.getRefundCount() + 1);
+
+        Wallet wallet = walletService.findWalletByCurrencyAndOwner(Currency.POCKET_TOKEN, user);
+        wallet.setBalance(wallet.getBalance().add(boughtCosmetic.getPrice()));
+        walletService.saveWallet(wallet);
+
         boughtCosmeticRepository.deleteById(id);
     }
 

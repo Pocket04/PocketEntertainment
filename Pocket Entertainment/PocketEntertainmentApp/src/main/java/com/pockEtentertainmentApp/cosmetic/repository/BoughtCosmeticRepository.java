@@ -11,4 +11,6 @@ import java.util.UUID;
 @Repository
 public interface BoughtCosmeticRepository extends JpaRepository<BoughtCosmetic, UUID> {
     List<BoughtCosmetic> findByUser(User user);
+
+    BoughtCosmetic getBoughtCosmeticById(UUID id);
 }

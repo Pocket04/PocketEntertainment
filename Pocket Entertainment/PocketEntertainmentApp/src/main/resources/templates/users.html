@@ -16,6 +16,15 @@
             </a>
         </div>
         <div class="auth-buttons">
+            <ul class="currency-container">
+                <li th:each="wallet : ${wallets}" class="currency-item">
+                    <span th:text="${wallet.balance}"></span>
+                    <img th:src="${wallet.currency.url}" class="currency-icon">
+                    <a th:href="@{'/wallets/' + ${user.id}}">
+                        <button class="buy-currency">+</button>
+                    </a>
+                </li>
+            </ul>
             <a th:href="@{/logout}" >
                 <button class="logout">Log Out</button>
             </a>
@@ -35,6 +44,7 @@
                         <th>Last Name</th>
                         <th>Email</th>
                         <th>Role</th>
+                        <th>Wallets</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -47,8 +57,13 @@
                         <td th:text="${user.email}"></td>
                         <td th:text="${user.role}" class="role"></td>
                         <td>
+                            <a th:href="@{'/wallets/' + ${user.id}}">
+                                <button class="role-button">Wallets</button>
+                            </a>
+                        </td>
+                        <td>
                             <form th:action="@{'/users/' + ${user.id} + '/role'}" th:method="PUT">
-                                <button class="role-button">Change Role</button>
+                                <button class="role-button">Make Admin</button>
                             </form>
                         </td>
                     </tr>

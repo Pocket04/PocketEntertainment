@@ -37,7 +37,7 @@
                 <li th:each="wallet : ${wallets}" class="currency-item">
                     <span th:text="${wallet.balance}"></span>
                     <img th:src="${wallet.currency.url}" class="currency-icon">
-                    <a th:href="@{/wallets}">
+                    <a th:href="@{'/wallets/' + ${user.id}}">
                         <button class="buy-currency">+</button>
                     </a>
                 </li>
@@ -75,20 +75,20 @@
                     <h2 th:text="${cosmetic.name}"></h2>
                     <h3 th:text="'Game: ' + ${cosmetic.game.name}"></h3>
                     <p class="text" th:text="'Description: ' + ${cosmetic.description}"></p>
-                    <p th:text="${cosmetic.price} + '$'" class="price"></p>
+                    <p th:text="${cosmetic.price} + '𝓟𝓣'" class="price"></p>
                     <form th:action="@{'/cosmetics/' + ${cosmetic.id} + '/bought' }" th:method="POST">
                         <button class="refund">Buy Cosmetic</button>
                     </form>
                 </li>
             </ul>
-            <hr>
+            <hr th:if="${!cosmetics.isEmpty() && !boughtCosmetics.isEmpty()}">
             <ul>
                 <li th:each="cosmetic : ${boughtCosmetics}" class="cosmetic-item">
                     <img class="profile-picture" th:src="${cosmetic.imageUrl}">
-                    <h2 th:text="${cosmetic.name}"></h2>
+                    <h2 th:text="${cosmetic.name} + '(owned)'"></h2>
                     <h3 th:text="'Game: ' + ${cosmetic.game.name}"></h3>
                     <p class="text" th:text="'Description: ' + ${cosmetic.description}"></p>
-                    <p th:text="${cosmetic.price} + '$'" class="price"></p>
+                    <p th:text="${cosmetic.price} + '𝓟𝓣'" class="price"></p>
                     <form th:action="@{'/cosmetics/' + ${cosmetic.id} + '/bought' }" th:method="DELETE">
                         <button class="refund">Refund</button>
                     </form>

@@ -40,6 +40,6 @@ public class Game {
     private User creator;
 
     @Column(nullable = false)
-    private int downloads;
+    private long downloads;
 
 }

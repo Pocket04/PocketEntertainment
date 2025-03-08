@@ -16,6 +16,15 @@
         </a>
     </div>
     <div class="auth-buttons">
+        <ul class="currency-container">
+            <li th:each="wallet : ${wallets}" class="currency-item">
+                <span th:text="${wallet.balance}"></span>
+                <img th:src="${wallet.currency.url}" class="currency-icon">
+                <a th:href="@{'/wallets/' + ${user.id}}">
+                    <button class="buy-currency">+</button>
+                </a>
+            </li>
+        </ul>
         <a th:href="@{/logout}" >
             <button class="logout">Log Out</button>
         </a>
@@ -29,7 +38,8 @@
         <table class="users-table">
             <thead>
             <tr>
-                <th></th>
+                <th>User</th>
+                <th>Username</th>
                 <th>Wallet ID</th>
                 <th>Currency</th>
                 <th>Balance</th>
@@ -37,8 +47,9 @@
             </tr>
             </thead>
             <tbody>
-            <tr class="horizon" th:each="wallet : ${wallets}">
+            <tr class="horizon" th:each="wallet : ${user.wallets}">
                 <td><img id="profile-img" th:src="${wallet.currency.url}"></td>
+                <td th:text="${user.username}"></td>
                 <td th:text="${wallet.id}"></td>
                 <td th:text="${wallet.currency.code}">----</td>
                 <td th:text="${wallet.balance}">----</td>

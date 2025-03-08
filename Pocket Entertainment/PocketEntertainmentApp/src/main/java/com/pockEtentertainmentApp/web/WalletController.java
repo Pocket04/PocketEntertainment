@@ -7,6 +7,7 @@ import com.pockEtentertainmentApp.wallet.model.Wallet;
 import com.pockEtentertainmentApp.wallet.service.WalletService;
 import com.pockEtentertainmentApp.web.dto.AddCurrencyRequest;
 import jakarta.validation.Valid;
+import org.hibernate.boot.Metadata;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -29,29 +30,30 @@ public class WalletController {
         this.userService = userService;
     }
 
-    @GetMapping("")
-    public ModelAndView buy(@AuthenticationPrincipal AuthenticationMetadata metadata) {
+    @GetMapping("/{id}")
+    public ModelAndView buy(@PathVariable UUID id, @AuthenticationPrincipal AuthenticationMetadata metadata) {
 
-        User user = userService.getUserById(metadata.getId());
-        List<Wallet> wallets = user.getWallets();
+        User user = userService.getUserById(id);
+        List<Wallet> wallets = userService.getUserById(metadata.getId()).getWallets();
 
         ModelAndView mav = new ModelAndView();
         mav.setViewName("wallets");
         mav.addObject("wallets", wallets);
         mav.addObject("addCurrencyRequest", new AddCurrencyRequest());
+        mav.addObject("user", user);
         return mav;
     }
     @PutMapping("/{id}")
-    public String addCurrency(@PathVariable UUID id, @Valid AddCurrencyRequest addCurrencyRequest, BindingResult bindingResult) {
+    public String addCurrency(@PathVariable UUID id,@AuthenticationPrincipal AuthenticationMetadata metadata, @Valid AddCurrencyRequest addCurrencyRequest, BindingResult bindingResult) {
 
         if (bindingResult.hasErrors()) {
-            return "redirect:/wallets";
+            return "redirect:/home";
         }
-
+        User user = userService.getUserById(metadata.getId());
         Wallet wallet = walletService.findWalletById(id);
-        walletService.addCurrency(wallet, addCurrencyRequest);
+        walletService.addCurrency(wallet, addCurrencyRequest, user);
 
-        return "redirect:/wallets";
+        return "redirect:/home";
     }
 
 }
