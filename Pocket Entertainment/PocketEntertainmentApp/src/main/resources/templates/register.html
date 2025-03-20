@@ -33,6 +33,8 @@
             <label for="password">Password:</label>
             <input type="password" placeholder="Enter your password" id="password" th:field="*{password}">
             <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="text-warning">Error Text Here</p>
+
+            <p th:text="${alreadyExists}"></p>
             
             <button type="submit" class="auth-button">Register</button>
 
@@ -41,7 +43,7 @@
     </div>
 
     <footer>
-        <p>© 2025 Pocket Entertainment. All Rights Reserved. | <a th:href="@{/contacts}" class="contact-link">Contact us</a></p>
+        <p>© 2025 Pocket Entertainment. All Rights Reserved.</p>
     </footer>
 
 </body>

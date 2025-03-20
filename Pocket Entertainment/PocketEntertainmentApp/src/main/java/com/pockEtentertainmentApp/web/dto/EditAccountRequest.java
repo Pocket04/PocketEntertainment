@@ -11,8 +11,6 @@ import org.hibernate.validator.constraints.URL;
 
 @Builder
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
 public class EditAccountRequest {
 
     @URL(message = "Must be a valid URL!")

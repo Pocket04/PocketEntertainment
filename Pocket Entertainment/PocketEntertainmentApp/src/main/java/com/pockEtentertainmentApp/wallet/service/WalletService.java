@@ -1,5 +1,6 @@
 package com.pockEtentertainmentApp.wallet.service;
 
+import com.pockEtentertainmentApp.exception.NoEuroException;
 import com.pockEtentertainmentApp.user.model.User;
 import com.pockEtentertainmentApp.wallet.model.Currency;
 import com.pockEtentertainmentApp.wallet.model.Wallet;
@@ -63,7 +64,7 @@ public class WalletService {
         ptBalance = ptBalance.add(addCurrencyRequest.getAmount());
 
         if(eurBalance.compareTo(BigDecimal.ZERO) < 0) {
-            throw new RuntimeException("EUR Balance less than 0");
+            throw new NoEuroException("EUR Balance less than 0");
         }
         eurWallet.setBalance(eurBalance);
         ptWallet.setBalance(ptBalance);

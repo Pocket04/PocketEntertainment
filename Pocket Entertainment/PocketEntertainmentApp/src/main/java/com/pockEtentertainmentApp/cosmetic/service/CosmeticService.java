@@ -4,6 +4,8 @@ import com.pockEtentertainmentApp.cosmetic.model.BoughtCosmetic;
 import com.pockEtentertainmentApp.cosmetic.model.Cosmetic;
 import com.pockEtentertainmentApp.cosmetic.repository.BoughtCosmeticRepository;
 import com.pockEtentertainmentApp.cosmetic.repository.CosmeticRepository;
+import com.pockEtentertainmentApp.exception.NoRefundsLeft;
+import com.pockEtentertainmentApp.exception.NotEnoughPT;
 import com.pockEtentertainmentApp.game.service.GameService;
 import com.pockEtentertainmentApp.user.model.User;
 import com.pockEtentertainmentApp.wallet.model.Currency;
@@ -26,15 +28,13 @@ public class CosmeticService {
     private final GameService gameService;
     private final BoughtCosmeticRepository boughtCosmeticRepository;
     private final WalletService walletService;
-    private final WalletRepository walletRepository;
 
     @Autowired
-    public CosmeticService(CosmeticRepository cosmeticRepository, GameService gameService, BoughtCosmeticRepository boughtCosmeticRepository, WalletService walletService, WalletRepository walletRepository) {
+    public CosmeticService(CosmeticRepository cosmeticRepository, GameService gameService, BoughtCosmeticRepository boughtCosmeticRepository, WalletService walletService) {
         this.cosmeticRepository = cosmeticRepository;
         this.gameService = gameService;
         this.boughtCosmeticRepository = boughtCosmeticRepository;
         this.walletService = walletService;
-        this.walletRepository = walletRepository;
     }
 
     public void addCosmetic(AddCosmeticRequest request) {
@@ -82,7 +82,7 @@ public class CosmeticService {
         boughtCosmeticRepository.save(boughtCosmetic);
 
         if (wallet.getBalance().compareTo(BigDecimal.ZERO) <= 0){
-            throw new RuntimeException("Not enough Pocket Tokens!");
+            throw new NotEnoughPT("Not enough Pocket Tokens!");
         }
     }
 
@@ -97,7 +97,7 @@ public class CosmeticService {
         User user = boughtCosmetic.getUser();
 
         if (user.getRefundCount() >= 3){
-            throw new RuntimeException("No refunds left!");
+            throw new NoRefundsLeft("No refunds left!");
         }
         user.setRefundCount(user.getRefundCount() + 1);
 

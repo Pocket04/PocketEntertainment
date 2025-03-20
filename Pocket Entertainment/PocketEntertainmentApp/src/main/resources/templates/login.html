@@ -10,7 +10,7 @@
 
     <nav class="navbar">
         <div class="nav-left">
-            <h1 th:href="@{/}" >Pocket Entertainment</h1>
+            <h1>Pocket Entertainment</h1>
         </div>
         <div class="auth-buttons">
             <a th:href="@{/register}">
@@ -24,11 +24,11 @@
             <h2>Log In</h2>
             <label for="username">Username:</label>
             <input type="text" placeholder="Enter your username" id="username" th:field="*{username}">
-            <p th:if="${#fields.hasErrors('username')}" th:errors="*{username}" class="text-warning">Error Text Here</p>
 
             <label for="password">Password:</label>
             <input type="password" placeholder="Enter your password" id="password" th:field="*{password}">
-            <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="text-warning">Error Text Here</p>
+
+            <p th:if="${errorMessage}" th:text="${errorMessage}"></p>
             
             <button type="submit" class="auth-button">Log In</button>
 
@@ -37,7 +37,7 @@
     </div>
 
     <footer>
-        <p>© 2025 Pocket Entertainment. All Rights Reserved. | <a th:href="@{/contacts}" class="contact-link">Contact us</a></p>
+        <p>© 2025 Pocket Entertainment. All Rights Reserved.</p>
     </footer>
 
 </body>

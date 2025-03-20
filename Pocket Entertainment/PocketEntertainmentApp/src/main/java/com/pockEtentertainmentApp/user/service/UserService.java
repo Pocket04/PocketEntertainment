@@ -1,16 +1,17 @@
 package com.pockEtentertainmentApp.user.service;
 
+import com.pockEtentertainmentApp.exception.UserNotFound;
+import com.pockEtentertainmentApp.exception.UsernameAlreadyExists;
 import com.pockEtentertainmentApp.security.AuthenticationMetadata;
 import com.pockEtentertainmentApp.user.model.Role;
 import com.pockEtentertainmentApp.user.model.User;
 import com.pockEtentertainmentApp.user.repository.UserRepository;
 import com.pockEtentertainmentApp.wallet.model.Currency;
-import com.pockEtentertainmentApp.wallet.model.Wallet;
 import com.pockEtentertainmentApp.wallet.service.WalletService;
 import com.pockEtentertainmentApp.web.dto.EditAccountRequest;
-import com.pockEtentertainmentApp.web.dto.LoginRequest;
 import com.pockEtentertainmentApp.web.dto.RegisterRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -37,10 +38,11 @@ public class UserService implements UserDetailsService {
 
     public void registerUser(RegisterRequest registerRequest){
 
-        Optional<User> optional = userRepository.findByUsernameOrEmail(registerRequest.getUsername(), registerRequest.getEmail());
+        Optional<User> usernameOptional = userRepository.findByUsername(registerRequest.getUsername());
+        Optional<User> emailOptional = userRepository.findByEmail(registerRequest.getEmail());
 
-        if (optional.isPresent()){
-            throw new RuntimeException("Username or email already in use");
+        if (usernameOptional.isPresent() || emailOptional.isPresent()) {
+            throw new UsernameAlreadyExists("Username or email already in use.");
         }
 
         User user = User.builder()
@@ -66,7 +68,7 @@ public class UserService implements UserDetailsService {
     }
 
     public User getUserById(UUID uuid) {
-        return userRepository.findById(uuid).orElseThrow(() -> new RuntimeException("User not found"));
+        return userRepository.findById(uuid).orElseThrow(() -> new UserNotFound("User not found"));
     }
     public void editUser(User user, EditAccountRequest editAccountRequest){
         user.setFirstName(editAccountRequest.getFirstName());
@@ -81,7 +83,7 @@ public class UserService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-        User user = userRepository.findByUsername(username).orElseThrow(() -> new RuntimeException("User not found"));
+        User user = userRepository.findByUsername(username).orElseThrow(() -> new UserNotFound("User not found"));
 
         return new AuthenticationMetadata(user.getId(), username, user.getPassword(), user.getRole(), user.isActive());
     }
@@ -90,8 +92,13 @@ public class UserService implements UserDetailsService {
         return userRepository.findAll();
     }
 
-    public void makeAdmin(User user) {
-        user.setRole(Role.ADMIN);
+    @PreAuthorize("hasRole('ADMIN')")
+    public void changeRole(User user) {
+        if (!user.getRole().equals(Role.ADMIN)) {
+            user.setRole(Role.ADMIN);
+        }else {
+            user.setRole(Role.USER);
+        }
         userRepository.save(user);
     }
 }

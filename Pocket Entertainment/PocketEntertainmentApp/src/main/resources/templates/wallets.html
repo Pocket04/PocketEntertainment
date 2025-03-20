@@ -34,12 +34,11 @@
 <!-- Users List Table -->
 <div class="container">
     <div class="auth-box">
-        <h2>Your Wallets</h2>
+        <h2 th:text="${user.username} + '\'s wallets.'">Your Wallets</h2>
         <table class="users-table">
             <thead>
             <tr>
-                <th>User</th>
-                <th>Username</th>
+                <th></th>
                 <th>Wallet ID</th>
                 <th>Currency</th>
                 <th>Balance</th>
@@ -49,7 +48,6 @@
             <tbody>
             <tr class="horizon" th:each="wallet : ${user.wallets}">
                 <td><img id="profile-img" th:src="${wallet.currency.url}"></td>
-                <td th:text="${user.username}"></td>
                 <td th:text="${wallet.id}"></td>
                 <td th:text="${wallet.currency.code}">----</td>
                 <td th:text="${wallet.balance}">----</td>

@@ -4,14 +4,11 @@ import com.pockEtentertainmentApp.security.AuthenticationMetadata;
 import com.pockEtentertainmentApp.user.model.User;
 import com.pockEtentertainmentApp.user.service.UserService;
 import com.pockEtentertainmentApp.wallet.model.Wallet;
-import com.pockEtentertainmentApp.wallet.service.WalletService;
 import com.pockEtentertainmentApp.web.dto.EditAccountRequest;
 import com.pockEtentertainmentApp.web.mapper.DtoMapper;
 import jakarta.validation.Valid;
-import org.hibernate.boot.Metadata;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -25,12 +22,10 @@ import java.util.UUID;
 @RequestMapping("/users")
 public class UserController {
     private final UserService userService;
-    private final WalletService walletService;
 
     @Autowired
-    public UserController(UserService userService, WalletService walletService) {
+    public UserController(UserService userService) {
         this.userService = userService;
-        this.walletService = walletService;
     }
 
     @GetMapping("")
@@ -63,7 +58,7 @@ public class UserController {
     public String makeUserAdmin(@PathVariable UUID id) {
 
         User user = userService.getUserById(id);
-        userService.makeAdmin(user);
+        userService.changeRole(user);
         return "redirect:/users";
     }
 

@@ -1,5 +1,9 @@
 /* General Page Styling */
 html, body {
+    background-image: url('../images/POP.webp');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
     height: 100%;
     margin: 0;
     display: flex;

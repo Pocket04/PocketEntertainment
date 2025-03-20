@@ -5,15 +5,17 @@ import com.pockEtentertainmentApp.cosmetic.model.Cosmetic;
 import com.pockEtentertainmentApp.cosmetic.service.CosmeticService;
 import com.pockEtentertainmentApp.game.model.Game;
 import com.pockEtentertainmentApp.game.service.GameService;
+import com.pockEtentertainmentApp.notification.dto.NotificationRequest;
+import com.pockEtentertainmentApp.notification.service.NotificationService;
 import com.pockEtentertainmentApp.security.AuthenticationMetadata;
 import com.pockEtentertainmentApp.user.model.User;
 import com.pockEtentertainmentApp.user.service.UserService;
 import com.pockEtentertainmentApp.wallet.model.Wallet;
-import com.pockEtentertainmentApp.wallet.service.WalletService;
 import com.pockEtentertainmentApp.web.dto.LoginRequest;
 import com.pockEtentertainmentApp.web.dto.RegisterRequest;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -30,12 +32,14 @@ public class IndexController {
     private final UserService userService;
     private final GameService gameService;
     private final CosmeticService cosmeticService;
+    private final NotificationService notificationService;
 
     @Autowired
-    public IndexController(UserService userService, GameService gameService, CosmeticService cosmeticService) {
+    public IndexController(UserService userService, GameService gameService, CosmeticService cosmeticService, NotificationService notificationService) {
         this.userService = userService;
         this.gameService = gameService;
         this.cosmeticService = cosmeticService;
+        this.notificationService = notificationService;
     }
 
 
@@ -61,7 +65,6 @@ public class IndexController {
         mav.addObject("cosmetics", cosmetics);
         mav.addObject("boughtCosmetics", boughtCosmetics);
         mav.addObject("wallets", wallets);
-        mav.addObject("showModal", false);
         return mav;
     }
 
@@ -113,7 +116,18 @@ public class IndexController {
     public ModelAndView contacts() {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("contacts");
+        modelAndView.addObject("notificationRequest", new NotificationRequest());
         return modelAndView;
+    }
+
+    @PostMapping("/contacts")
+    public String sendEmail(@Valid NotificationRequest notificationRequest, BindingResult bindingResult, @AuthenticationPrincipal AuthenticationMetadata authenticationMetadata) {
+        if (bindingResult.hasErrors()) {
+            return "contacts";
+        }
+        notificationService.sendNotification(notificationRequest, authenticationMetadata.getId());
+
+        return "redirect:/home";
     }
 
 }

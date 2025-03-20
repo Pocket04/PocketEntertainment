@@ -47,6 +47,10 @@ html, body {
 
 /* Content Section */
 .container {
+    background-image: url('../images/POP.webp');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
     flex: 1;
     display: flex;
     justify-content: center;
@@ -56,7 +60,11 @@ html, body {
 
 /* Game Box */
 .game-box {
-    background-color: white;
+    background-image: url('../images/POP.webp');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0.6;
     padding: 25px;
     width: 80%;
     max-width: 800px;
@@ -65,25 +73,21 @@ html, body {
     text-align: center;
 }
 
-/* Game Image */
-.game-image {
-    width: 100%;
-    max-width: 600px;
-    border-radius: 10px;
-    margin-bottom: 15px;
-}
 
 /* Game Title */
 .game-box h1 {
     font-size: 28px;
-    color: #333;
+    color: #F8F8F8;
     margin-bottom: 10px;
 }
 
 /* Game Description */
 .game-description {
+    background-color: rgba(0, 0, 0, 0.7); /* Dark transparent background */
+    color: #F8F8F8; /* Light text */
+    padding: 5px;
+    border-radius: 5px;
     font-size: 16px;
-    color: #555;
     line-height: 1.5;
 }
 

@@ -20,8 +20,7 @@ public class WebMVCConfiguration implements WebMvcConfigurer {
         http
                 .authorizeHttpRequests(matchers -> matchers
                         .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
-                        .requestMatchers("/", "/register", "/contacts").permitAll()
-                        .requestMatchers("/add-game", "add-cosmetic", "/users", "/users/{id}/role").hasRole("ADMIN")
+                        .requestMatchers("/", "/register").permitAll()
                         .anyRequest().authenticated())
                 .formLogin(formLogin -> formLogin.loginPage("/login")
                         .defaultSuccessUrl("/home", true)

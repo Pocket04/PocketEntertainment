@@ -7,8 +7,6 @@
     <link rel="stylesheet" href="/css/usersStyle.css">
 </head>
 <body>
-
-    <!-- Navbar -->
     <nav class="navbar">
         <div class="nav-left">
             <a th:href="@{/home}" >
@@ -63,7 +61,7 @@
                         </td>
                         <td>
                             <form th:action="@{'/users/' + ${user.id} + '/role'}" th:method="PUT">
-                                <button class="role-button">Make Admin</button>
+                                <button class="role-button">Change Role</button>
                             </form>
                         </td>
                     </tr>
@@ -74,7 +72,7 @@
 
     <!-- Footer -->
     <footer>
-        <p>© 2025 Pocket Entertainment. All Rights Reserved. | <a th:href="@{/contacts}" class="contact-link">Contact us</a></p>
+        <p>© 2025 Pocket Entertainment. All Rights Reserved.</p>
     </footer>
 
 </body>

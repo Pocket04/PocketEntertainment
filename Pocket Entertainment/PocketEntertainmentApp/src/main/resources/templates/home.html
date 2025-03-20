@@ -15,14 +15,14 @@
             <a th:href="@{/reviews}">
                 <button class="add-game">Reviews</button>
             </a>
+            <a th:href="@{'/users/' + ${user.id}}" >
+                <button class="add-game">Account</button>
+            </a>
             <a th:if="${'ADMIN'.equals(user.role.toString())}" th:href="@{/games/add-game}" >
                 <button class="add-game">Add Game</button>
             </a>
             <a th:if="${'ADMIN'.equals(user.role.toString())}" th:href="@{/cosmetics/add}" >
                 <button class="add-game">Add Cosmetic</button>
-            </a>
-            <a th:href="@{'/users/' + ${user.id}}" >
-                <button class="add-game">Account</button>
             </a>
         </div>
 
@@ -49,6 +49,7 @@
         </div>
     </nav>
 
+    <p style="text-align: center; color: red" th:text="${noEuro}"></p>
 
     <div class="container">
         <div class="games">
@@ -60,7 +61,7 @@
                     <p th:if="${'ADMIN'.equals(user.role.toString())}" th:text="'Creator: ' + ${game.creator.username}"></p>
                     <hr th:if="${'ADMIN'.equals(user.role.toString())}">
                     <p class="text" th:text="'Description: ' + ${game.description}"></p>
-                        <form th:action="@{'/games/' + ${game.id}}" th:method="POST">
+                        <form th:action="@{'/games/' + ${game.id}}" th:method="GET">
                             <button type="submit" class="refund">Download</button>
                         </form>
                 </li>
@@ -69,6 +70,7 @@
 
         <div class="cosmetics">
             <h2>Cosmetics</h2>
+            <p style="color: red" th:text="${cosmeticError}"></p>
             <ul>
                 <li th:each="cosmetic : ${cosmetics}" class="cosmetic-item">
                     <img class="profile-picture" th:src="${cosmetic.imageUrl}">

@@ -5,10 +5,14 @@ import com.pockEtentertainmentApp.security.AuthenticationMetadata;
 import com.pockEtentertainmentApp.user.model.User;
 import com.pockEtentertainmentApp.user.service.UserService;
 import com.pockEtentertainmentApp.web.dto.AddGameRequest;
+import jakarta.servlet.ServletOutputStream;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -19,6 +23,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.UUID;
@@ -36,16 +43,15 @@ public class GameController {
         this.userService = userService;
     }
 
-    @PostMapping("/{gameId}")
-    public void downloadGame(@PathVariable UUID gameId, HttpServletResponse response){
-
-        Path path = Paths.get("/files/virus-computer.gif");
-
-        response.setContentType("image/gif");
-        response.setContentLengthLong(path.toFile().length());
-        response.setHeader("Content-Disposition", "attachment; filename=\"virus-computer.gif\"");
-
+    @GetMapping("/{gameId}")
+    public ResponseEntity<Resource> downloadGame(@PathVariable UUID gameId, HttpServletResponse response) throws MalformedURLException {
         gameService.downloadGame(gameId);
+
+        Resource resource = new UrlResource(Paths.get("C:\\Users\\icaka\\Desktop\\Pocket Entertainment\\PocketEntertainmentApp\\src\\main\\resources\\static\\files\\virus-computer.gif").toUri());
+
+        return ResponseEntity.ok()
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + resource.getFilename() + "\"")
+                .body(resource);
     }
 
     @GetMapping("/add-game")
