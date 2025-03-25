@@ -39,7 +39,7 @@
 
                 <label for="game">Select Game:</label>
                 <select id="game" required th:field="*{game}">
-                    <option th:each="igame : ${games}" th:text="${igame.name}" th:value="${igame.id}"></option>
+                    <option th:each="igame : ${games}" th:text="${igame.name}" th:value="${igame}"></option>
                 </select>
                 <p th:if="${#fields.hasErrors('game')}" th:errors="*{game}" class="text-warning">Error Text Here</p>
 
