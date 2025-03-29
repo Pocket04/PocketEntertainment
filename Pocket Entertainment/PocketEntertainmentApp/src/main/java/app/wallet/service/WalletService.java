@@ -1,16 +1,22 @@
 package app.wallet.service;
 
 import app.exception.NoEuroException;
+import app.exception.NotEnoughPT;
 import app.user.model.User;
+import app.user.service.UserService;
 import app.wallet.model.Currency;
 import app.wallet.model.Wallet;
 import app.wallet.repository.WalletRepository;
 import app.web.dto.AddCurrencyRequest;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -18,10 +24,12 @@ public class WalletService {
 
 
     private final WalletRepository walletRepository;
+    private final UserService userService;
 
     @Autowired
-    public WalletService(WalletRepository walletRepository) {
+    public WalletService(WalletRepository walletRepository, @Lazy UserService userService) {
         this.walletRepository = walletRepository;
+        this.userService = userService;
     }
 
     public void createWallet(User user, Currency currency) {
@@ -39,10 +47,6 @@ public class WalletService {
 
     public Wallet findWalletByCurrencyAndOwner(Currency currency, User user) {
         return walletRepository.getWalletByCurrencyAndOwner(currency, user).orElseThrow(() -> new RuntimeException("Wallet not found"));
-    }
-
-    public void saveWallet(Wallet wallet) {
-        walletRepository.save(wallet);
     }
 
     @Transactional
@@ -69,6 +73,44 @@ public class WalletService {
         ptWallet.setBalance(ptBalance);
         walletRepository.save(eurWallet);
         walletRepository.save(ptWallet);
+    }
+
+    @Transactional
+    public void spendMoney(BigDecimal amount, User user) {
+        Optional<Wallet> optWallet = walletRepository.getWalletByCurrencyAndOwner(Currency.POCKET_TOKEN, user);
+        if (optWallet.isEmpty()) {
+            throw new RuntimeException("Wallet not found");
+        }
+
+        Wallet wallet = optWallet.get();
+        wallet.setBalance(wallet.getBalance().subtract(amount));
+        if (wallet.getBalance().compareTo(BigDecimal.ZERO) <= 0){
+            throw new NotEnoughPT("Not enough Pocket Tokens!");
+        }
+        walletRepository.save(wallet);
+    }
+    @Transactional
+    public void refundPT(BigDecimal amount, User user) {
+        Optional<Wallet> optWallet = walletRepository.getWalletByCurrencyAndOwner(Currency.POCKET_TOKEN, user);
+
+        if (optWallet.isEmpty()) {
+            throw new RuntimeException("Wallet not found");
+        }
+        Wallet wallet = optWallet.get();
+
+        wallet.setBalance(wallet.getBalance().add(amount));
+        walletRepository.save(wallet);
+
+    }
+
+    @Scheduled(fixedRate = 600000)
+    public void addTwentyPocketTokensEveryTenMinutes() {
+        List<User> users = userService.getAllUsers();
+        for (User user : users) {
+            Wallet wallet = findWalletByCurrencyAndOwner(Currency.POCKET_TOKEN, user);
+            wallet.setBalance(wallet.getBalance().add(BigDecimal.valueOf(20)));
+            walletRepository.save(wallet);
+        }
     }
 
 

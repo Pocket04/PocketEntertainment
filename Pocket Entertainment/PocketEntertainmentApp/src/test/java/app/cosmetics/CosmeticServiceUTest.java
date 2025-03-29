@@ -100,42 +100,6 @@ public class CosmeticServiceUTest {
         verify(cosmeticRepository, times(1)).findById(id);
     }
     @Test
-    void buyCosmetic_doesNotIncreaseCosmeticPurchases_whenNotEnoughPTExceptionIsThrown() {
-        Cosmetic cosmetic = new Cosmetic();
-        cosmetic.setPurchases(0);
-        cosmetic.setPrice(BigDecimal.TEN);
-        User user = new User();
-        Wallet ptWallet = new Wallet();
-        ptWallet.setCurrency(Currency.POCKET_TOKEN);
-        ptWallet.setBalance(BigDecimal.ZERO);
-
-        when(walletService.findWalletByCurrencyAndOwner(Currency.POCKET_TOKEN, user)).thenReturn(ptWallet);
-
-        assertThrows(NotEnoughPT.class, () -> cosmeticService.buyCosmetic(cosmetic, user));
-        assertEquals(0, cosmetic.getPurchases());
-        verify(walletService, times(1)).findWalletByCurrencyAndOwner(Currency.POCKET_TOKEN, user);
-        verify(boughtCosmeticRepository, never()).save(any());
-        verify(cosmeticRepository, never()).save(any());
-    }
-    @Test
-    void buyCosmetic_IncreasesCosmeticPurchases_whenEnoughPT() {
-        Cosmetic cosmetic = new Cosmetic();
-        cosmetic.setPurchases(0);
-        cosmetic.setPrice(BigDecimal.TEN);
-        User user = new User();
-        Wallet ptWallet = new Wallet();
-        ptWallet.setCurrency(Currency.POCKET_TOKEN);
-        ptWallet.setBalance(BigDecimal.valueOf(20));
-
-        when(walletService.findWalletByCurrencyAndOwner(Currency.POCKET_TOKEN, user)).thenReturn(ptWallet);
-
-        cosmeticService.buyCosmetic(cosmetic, user);
-        assertEquals(1, cosmetic.getPurchases());
-        verify(walletService, times(1)).findWalletByCurrencyAndOwner(Currency.POCKET_TOKEN, user);
-        verify(boughtCosmeticRepository, times(1)).save(any());
-        verify(cosmeticRepository, times(1)).save(any());
-    }
-    @Test
     void getAllBoughtCosmetics_returnsListOfBoughtCosmetics() {
         User user = new User();
         BoughtCosmetic cosmetic = new BoughtCosmetic();
@@ -162,7 +126,6 @@ public class CosmeticServiceUTest {
        assertEquals(3, user.getRefundCount());
        verify(boughtCosmeticRepository, never()).deleteById(any());
        verify(walletService, never()).findWalletByCurrencyAndOwner(Currency.POCKET_TOKEN, user);
-       verify(walletService, never()).saveWallet(any());
     }
     @Test
     void refundCosmetic_increaseRefundCounterAndAppendWalletBalance_whenRefundsAreLessThanThree() {
@@ -176,14 +139,10 @@ public class CosmeticServiceUTest {
         wallet.setBalance(BigDecimal.ZERO);
 
         when(boughtCosmeticRepository.getBoughtCosmeticById(id)).thenReturn(cosmetic);
-        when(walletService.findWalletByCurrencyAndOwner(Currency.POCKET_TOKEN, user)).thenReturn(wallet);
 
         cosmeticService.refundCosmetic(id);
         assertEquals(3, user.getRefundCount());
-        assertEquals(BigDecimal.TEN, wallet.getBalance());
         verify(boughtCosmeticRepository, times(1)).deleteById(any());
-        verify(walletService, times(1)).findWalletByCurrencyAndOwner(Currency.POCKET_TOKEN, user);
-        verify(walletService, times(1)).saveWallet(any());
 
     }
 

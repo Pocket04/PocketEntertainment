@@ -91,12 +91,6 @@ public class WalletServiceUTest {
         assertThrows(RuntimeException.class, () -> walletService.findWalletByCurrencyAndOwner(currency, user));
     }
     @Test
-    void saveWallet_success() {
-        Wallet wallet = new Wallet();
-        walletService.saveWallet(wallet);
-        verify(walletRepository, times(1)).save(any(Wallet.class));
-    }
-    @Test
     void updateEURWallet_success() {
         AddCurrencyRequest dto = new AddCurrencyRequest();
         dto.setAmount(BigDecimal.TEN);
@@ -124,6 +118,17 @@ public class WalletServiceUTest {
         when(walletRepository.getWalletByCurrencyAndOwner(Currency.EURO, user)).thenReturn(Optional.of(eurWallet));
 
         assertThrows(RuntimeException.class, () -> walletService.addCurrency(ptWallet, dto, user));
+    }
+    @Test
+    void refundMoney_whenWalletExists_returnWallet() {
+
+        when(walletRepository.getWalletByCurrencyAndOwner(currency, user)).thenReturn(Optional.of(ptWallet));
+
+        walletService.refundPT(BigDecimal.TEN, user);
+        verify(walletRepository, times(1)).save(any(Wallet.class));
+        assertEquals(ptWallet.getBalance(), BigDecimal.valueOf(30));
+
+
     }
 
 }

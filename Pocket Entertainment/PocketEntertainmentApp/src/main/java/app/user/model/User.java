@@ -13,6 +13,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @Getter
 @Setter
+@Table(name = "users")
 public class User {
 
     @Id
@@ -43,7 +44,7 @@ public class User {
 
     private boolean isActive;
 
-    @OneToMany(mappedBy = "owner")
+    @OneToMany(mappedBy = "owner", fetch = FetchType.EAGER)
     private List<Wallet> wallets;
 
     @Column(nullable = false)

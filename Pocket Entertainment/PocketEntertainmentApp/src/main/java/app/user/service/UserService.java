@@ -36,7 +36,7 @@ public class UserService implements UserDetailsService {
         this.walletService = walletService;
     }
 
-    public void registerUser(RegisterRequest registerRequest){
+    public User registerUser(RegisterRequest registerRequest){
 
         Optional<User> usernameOptional = userRepository.findByUsername(registerRequest.getUsername());
         Optional<User> emailOptional = userRepository.findByEmail(registerRequest.getEmail());
@@ -64,7 +64,7 @@ public class UserService implements UserDetailsService {
         walletService.createWallet(user, Currency.POCKET_TOKEN);
         walletService.createWallet(user,Currency.EURO);
 
-
+        return user;
     }
 
     public User getUserById(UUID uuid) {

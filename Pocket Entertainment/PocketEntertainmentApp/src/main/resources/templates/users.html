@@ -18,10 +18,11 @@
                 <li th:each="wallet : ${wallets}" class="currency-item">
                     <span th:text="${wallet.balance}"></span>
                     <img th:src="${wallet.currency.url}" class="currency-icon">
-                    <a th:href="@{'/wallets/' + ${user.id}}">
-                        <button class="buy-currency">+</button>
-                    </a>
                 </li>
+
+                <a th:href="@{'/wallets/' + ${user.id}}">
+                    <button class="buy-currency">+</button>
+                </a>
             </ul>
             <a th:href="@{/logout}" >
                 <button class="logout">Log Out</button>

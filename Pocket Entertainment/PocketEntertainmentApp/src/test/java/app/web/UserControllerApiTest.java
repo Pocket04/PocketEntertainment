@@ -6,6 +6,8 @@ import app.user.model.User;
 import app.user.service.UserService;
 import app.wallet.model.Currency;
 import app.wallet.model.Wallet;
+import app.web.dto.EditAccountRequest;
+import app.web.mapper.DtoMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -171,6 +173,102 @@ public class UserControllerApiTest {
         verify(userService, times(1)).changeRole(any());
 
     }
+    @Test
+    void AuthenticatedGetProfileRequest_returnsEditProfileView() throws Exception {
+        Wallet ptWallet = new Wallet();
+        ptWallet.setCurrency(Currency.POCKET_TOKEN);
+        Wallet eurWallet = new Wallet();
+        eurWallet.setCurrency(Currency.EURO);
+
+        User user = User.builder()
+                .id(UUID.randomUUID())
+                .email("test@test.com")
+                .username("test")
+                .password("test")
+                .wallets(List.of(ptWallet, eurWallet))
+                .role(Role.USER)
+                .isActive(true)
+                .build();
+
+        AuthenticationMetadata metadata = new AuthenticationMetadata(UUID.randomUUID(), "testUser", "123123", Role.USER, true);
+
+        when(userService.getUserById(any())).thenReturn(user);
+
+        MockHttpServletRequestBuilder request = get("/users/{id}/profile", UUID.randomUUID())
+                .with(user(metadata))
+                .with(csrf());
+
+        mockMvc.perform(request)
+                .andExpect(status().is2xxSuccessful())
+                .andExpect(model().attributeExists("user"))
+                .andExpect(model().attributeExists("editAccountRequest"))
+                .andExpect(view().name("edit-profile"));
+
+        verify(userService, times(1)).getUserById(any());
+    }
+    @Test
+    void UnauthenticatedGetProfileRequest_redirectsToLogIn() throws Exception {
+
+        MockHttpServletRequestBuilder request = get("/users/{id}/profile", UUID.randomUUID());
+
+        mockMvc.perform(request)
+                .andExpect(status().is3xxRedirection());
+
+        verify(userService, never()).getUserById(any());
+    }
+    @Test
+    void AuthenticatedPutProfileRequest_updatesProfileAndRedirects() throws Exception {
+        UUID userId = UUID.randomUUID();
+
+        User user = User.builder()
+                .id(userId)
+                .email("test@test.com")
+                .username("test")
+                .password("test")
+                .role(Role.USER)
+                .isActive(true)
+                .build();
+
+        AuthenticationMetadata metadata = new AuthenticationMetadata(userId, "testUser", "123123", Role.USER, true);
+
+        when(userService.getUserById(userId)).thenReturn(user);
+
+        MockHttpServletRequestBuilder request = put("/users/{id}/profile", userId)
+                .with(user(metadata))
+                .with(csrf())
+                .param("profilePicture", "https://valid.url/image.jpg")
+                .param("firstName", "NewFirst")
+                .param("lastName", "NewLast")
+                .param("email", "newemail@test.com");
+
+        mockMvc.perform(request)
+                .andExpect(status().is3xxRedirection())
+                .andExpect(redirectedUrl("/users/" + userId));
+
+        verify(userService, times(1)).getUserById(userId);
+    }
+    @Test
+    void UnauthenticatedPutProfileRequest_redirectsToLogIn() throws Exception {
+        UUID userId = UUID.randomUUID();
+
+        MockHttpServletRequestBuilder request = put("/users/{id}/profile", userId)
+                .with(csrf()) // CSRF protection required for PUT requests
+                .param("profilePicture", "https://valid.url/image.jpg")
+                .param("firstName", "NewFirst")
+                .param("lastName", "NewLast")
+                .param("email", "newemail@test.com");
+
+        mockMvc.perform(request)
+                .andExpect(status().is3xxRedirection());
+
+        verify(userService, never()).getUserById(any());
+        verify(userService, never()).editUser(any(), any());
+    }
+
+
+
+
+
 
 
 
