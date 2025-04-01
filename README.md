@@ -1,5 +1,6 @@
 # PocketEntertainmentApp
 This is my project for "Pocket Entertainment" for the final exam for the softuni module "Java Web"
+JAVA 17
 
 When registering the first created user is an ADMIN for presentation purposes.
 ADMINs can add games and cosmetics.
