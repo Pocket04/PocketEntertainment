@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notifications</title>
+    <link rel="stylesheet" href="/css/usersStyle.css">
+</head>
+<body>
+<nav class="navbar">
+    <div class="nav-left">
+        <a th:href="@{/home}" >
+            <button class="add-game">Home</button>
+        </a>
+    </div>
+    <div class="auth-buttons">
+        <a th:href="@{/logout}" >
+            <button class="logout">Log Out</button>
+        </a>
+    </div>
+</nav>
+
+<div class="container">
+    <div class="auth-box">
+        <h2>Notifications List</h2>
+        <table class="users-table">
+            <thead>
+            <tr>
+                <th>User ID</th>
+                <th>Subject</th>
+                <th>Body</th>
+                <th>Date</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="notification : ${notifications}">
+                <td th:text="${notification.userId}"></td>
+                <td th:text="${notification.subject}"></td>
+                <td th:text="${notification.body}"></td>
+                <td th:text="${#temporals.format(notification.date, 'dd MMM yyyy')}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<footer>
+    <p>© 2025 Pocket Entertainment. All Rights Reserved.</p>
+</footer>
+
+</body>
+</html>

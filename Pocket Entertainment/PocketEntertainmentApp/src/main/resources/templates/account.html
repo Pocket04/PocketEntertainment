@@ -8,7 +8,6 @@
 </head>
 <body>
 
-    <!-- Navbar -->
     <nav class="navbar">
         <div class="nav-left">
             <a th:href="@{/home}" >
@@ -20,16 +19,13 @@
         </a>
     </nav>
 
-    <!-- Account Page Container -->
     <div class="container">
         <div class="auth-box">
             <h2>My Account</h2>
-            <!-- Profile Picture -->
             <div class="profile-picture">
                 <img id="profile-img" th:src="${#strings.isEmpty(user.profilePicture) ? 'https://goodwillsv.org/wp-content/uploads/2018/10/profile-pic-missing-default.jpg' : user.profilePicture}">
             </div>
 
-            <!-- User Info -->
             <div class="user-info">
                 <p><strong>Username:</strong> <span id="username" th:text="${user.username}">JohnDoe</span></p>
                 <p th:if="${user.firstName}"><strong>First Name:</strong> <span id="first-name" th:text="${user.firstName}">John</span></p>
@@ -37,14 +33,12 @@
                 <p><strong>Email:</strong> <span id="email" th:text="${user.email}"></span></p>
             </div>
 
-            <!-- Edit Button -->
             <a th:href="@{'/users/' + ${user.id} + '/profile'}">
                 <button class="auth-button">Edit Profile</button>
             </a>
         </div>
     </div>
 
-    <!-- Footer -->
     <footer>
         <p>© 2025 Pocket Entertainment. All Rights Reserved. | <a th:href="@{/contacts}" class="contact-link">Contact us</a></p>
     </footer>

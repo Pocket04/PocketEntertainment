@@ -18,6 +18,9 @@
             <a th:href="@{'/users/' + ${user.id}}" >
                 <button class="add-game">Account</button>
             </a>
+            <a th:href="@{/notifications}">
+                <button class="add-game">Notifications</button>
+            </a>
             <a th:if="${'ADMIN'.equals(user.role.toString())}" th:href="@{/games/add-game}" >
                 <button class="add-game">Add Game</button>
             </a>
@@ -49,8 +52,6 @@
             </a>
         </div>
     </nav>
-
-    <p style="text-align: center; color: red" th:text="${noEuro}"></p>
 
     <div class="container">
         <div class="games">

@@ -11,7 +11,7 @@ body {
 
 .navbar {
     display: flex;
-    justify-content: space-between; /* Keeps nav items spaced out */
+    justify-content: space-between;
     align-items: center;
     background-color: #222;
     color: white;
@@ -25,9 +25,9 @@ body {
 }
 
 .nav-center {
-    position: absolute; /* Positioning it in the center */
+    position: absolute;
     left: 50%;
-    transform: translateX(-50%); /* Offset by 50% to truly center */
+    transform: translateX(-50%);
 }
 
 button {
@@ -44,7 +44,7 @@ button {
     padding: 10px 15px;
     cursor: pointer;
     border-radius: 5px;
-    margin-left: 20px; /* Adds spacing between logo and button */
+    margin-left: 20px;
 }
 
 .users {
@@ -53,25 +53,25 @@ button {
     border: none;
     cursor: pointer;
     border-radius: 5px;
-    justify-content: center; /* Adds spacing between logo and button */
+    justify-content: center;
 }
 .auth-buttons {
     display: flex;
     align-items: center;
-    justify-content: flex-end; /* Aligns everything to the right */
-    margin-left: 20px; /* Adjust this value to create space between the currencies and the logout button */
+    justify-content: flex-end;
+    margin-left: 20px;
 }
 
 .currency-container {
     display: flex;
     align-items: center;
-    margin-right: 20px; /* Space between the currencies and the logout button */
+    margin-right: 20px;
 }
 
 .currency-item {
     display: flex;
     align-items: center;
-    margin-right: 10px; /* Space between each currency */
+    margin-right: 10px;
 }
 
 .currency-icon {
@@ -83,7 +83,7 @@ button {
 
 .buy-currency {
     font-size: 20px;
-    background-color: #4CAF50; /* Green color for the button */
+    background-color: #4CAF50;
     color: white;
     border: none;
     padding: 5px 10px;
@@ -92,11 +92,11 @@ button {
 }
 
 .buy-currency:hover {
-    background-color: #45a049; /* Darker green on hover */
+    background-color: #45a049;
 }
 
 .auth-buttons button {
-    background-color: #d63384;
+    background-color: #e91e63;
     color: white;
     margin-left: 5px;
 }

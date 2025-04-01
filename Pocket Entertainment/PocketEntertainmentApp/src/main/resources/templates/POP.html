@@ -1,42 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Planet of Peace</title>
-    <link rel="stylesheet" href="/css/POPStyle.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Planet of Peace</title>
+  <link rel="stylesheet" href="/css/POPStyle.css">
 </head>
 <body>
 
 <nav class="navbar">
-    <div class="nav-left">
-        <a th:href="@{/home}" >
-            <button class="add-game">Home</button>
-        </a>
-    </div>
-    <div class="auth-buttons">
-        <a th:href="@{/logout}" >
-            <button class="logout">Log Out</button>
-        </a>
-    </div>
+  <div class="nav-left">
+    <a th:href="@{/home}">
+      <button class="add-game">Home</button>
+    </a>
+  </div>
+  <div class="auth-buttons">
+    <a th:href="@{/logout}">
+      <button class="logout">Log Out</button>
+    </a>
+  </div>
 </nav>
 
-    <!-- Game Display Section -->
-    <div class="container">
-        <div class="game-box">
-            <h1>Planet of Peace</h1>
-            <p class="game-description">
-                **Planet of Peace** is an upcoming adventure game where players explore a beautifully crafted alien world. 
-                Immerse yourself in stunning landscapes, solve engaging puzzles, and experience an emotional journey that 
-                encourages harmony and collaboration.
-            </p>
-        </div>
-    </div>
+<div class="container">
+  <div class="game-box">
+    <h1>Planet of Peace</h1>
+    <p class="game-description">
+      **Planet of Peace** is an upcoming adventure game where players explore a beautifully crafted alien world.
+      Immerse yourself in stunning landscapes, solve engaging puzzles, and experience an emotional journey that
+      encourages harmony and collaboration.
+    </p>
+  </div>
+</div>
 
-    <!-- Footer -->
-    <footer>
-        <p>© 2025 Pocket Entertainment. All Rights Reserved.</p>
-    </footer>
+<footer>
+  <p>© 2025 Pocket Entertainment. All Rights Reserved.</p>
+</footer>
 
 </body>
 </html>

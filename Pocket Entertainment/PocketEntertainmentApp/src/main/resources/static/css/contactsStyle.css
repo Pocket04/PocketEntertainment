@@ -1,4 +1,4 @@
-/* General Styles */
+
 body {
     background-image: url('../images/POP.webp');
     background-size: cover;
@@ -14,7 +14,6 @@ body {
     height: 100vh;
 }
 
-/* Contact Page Container */
 .contact-container {
     width: 50%;
     background: #ffffff;
@@ -24,13 +23,11 @@ body {
     text-align: center;
 }
 
-/* Heading */
 .contact-container h2 {
     color: #333;
     margin-bottom: 15px;
 }
 
-/* Form Styles */
 .contact-form {
     display: flex;
     flex-direction: column;
@@ -42,7 +39,6 @@ body {
     text-align: left;
 }
 
-/* Input Fields */
 .contact-form input,
 .contact-form textarea {
     width: 100%;
@@ -53,7 +49,6 @@ body {
     font-size: 16px;
 }
 
-/* Submit Button */
 .contact-form button {
     background: #007bff;
     color: white;
@@ -69,7 +64,6 @@ body {
     background: #0056b3;
 }
 
-/* Responsive Design */
 @media (max-width: 768px) {
     .contact-container {
         width: 80%;

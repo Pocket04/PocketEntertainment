@@ -9,7 +9,6 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @EnableFeignClients
 @EnableScheduling
 public class PocketEntertainmentAppApplication {
-
 	public static void main(String[] args) {
 		SpringApplication.run(PocketEntertainmentAppApplication.class, args);
 	}

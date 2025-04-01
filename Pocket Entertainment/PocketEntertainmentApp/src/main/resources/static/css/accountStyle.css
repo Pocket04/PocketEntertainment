@@ -1,4 +1,4 @@
-/* General Page Styling */
+
 body {
     background-image: url('../images/POP.webp');
     background-size: cover;
@@ -7,10 +7,9 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #eceff4; /* Adjusted to match screenshot */
+    background-color: #eceff4;
 }
 
-/* Navbar */
 .navbar {
     background-color: #222;
     color: white;
@@ -47,7 +46,6 @@ body {
     margin-left: 8px;
 }
 
-/* Authentication Box */
 .container {
     display: flex;
     justify-content: center;
@@ -66,7 +64,7 @@ body {
 
 .auth-box h2 {
     margin-bottom: 20px;
-    font-size: 24px; /* Adjusted for better readability */
+    font-size: 24px;
 }
 
 .auth-box label {
@@ -102,7 +100,6 @@ body {
     background-color: #138496;
 }
 
-/* Footer */
 footer {
     background-color: #222;
     color: white;
@@ -143,7 +140,6 @@ footer a:hover {
     font-size: 14px;
     background-color: white;
 }
-/* Profile Picture Styling */
 .profile-picture {
     display: flex;
     justify-content: center;
@@ -157,7 +153,6 @@ footer a:hover {
     border: 2px solid rgba(51, 56, 69, 0.62);
 }
 
-/* User Info */
 .user-info p {
     font-size: 16px;
     margin: 8px 0;

@@ -1,4 +1,4 @@
-/* General Page Styling */
+
 html, body {
     height: 100%;
     margin: 0;
@@ -8,7 +8,6 @@ html, body {
     font-family: Arial, sans-serif;
 }
 
-/* Navbar */
 .navbar {
     background-color: #222;
     color: white;
@@ -45,7 +44,6 @@ html, body {
     margin-left: 8px;
 }
 
-/* Content Section */
 .container {
     background-image: url('../images/POP.webp');
     background-size: cover;
@@ -58,7 +56,6 @@ html, body {
     padding: 20px;
 }
 
-/* Game Box */
 .game-box {
     background-image: url('../images/POP.webp');
     background-size: cover;
@@ -74,24 +71,21 @@ html, body {
 }
 
 
-/* Game Title */
 .game-box h1 {
     font-size: 28px;
     color: #F8F8F8;
     margin-bottom: 10px;
 }
 
-/* Game Description */
 .game-description {
-    background-color: rgba(0, 0, 0, 0.7); /* Dark transparent background */
-    color: #F8F8F8; /* Light text */
+    background-color: rgba(0, 0, 0, 0.7);
+    color: #F8F8F8;
     padding: 5px;
     border-radius: 5px;
     font-size: 16px;
     line-height: 1.5;
 }
 
-/* Footer */
 footer {
     background-color: #222;
     color: white;

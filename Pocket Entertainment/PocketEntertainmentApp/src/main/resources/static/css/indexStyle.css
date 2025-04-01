@@ -1,4 +1,4 @@
-/* General Page Styling */
+
 body {
     background-image: url('../images/POP.webp');
     background-size: cover;
@@ -22,13 +22,11 @@ body {
     padding: 15px 20px;
 }
 
-/* Flexbox for the left side (Logo + Add Game button) */
 .nav-left {
     display: flex;
     align-items: center;
 }
 
-/* Add Game button with spacing */
 .add-game {
     background-color: #17a2b8;
     color: white;
@@ -36,7 +34,7 @@ body {
     padding: 10px 15px;
     cursor: pointer;
     border-radius: 5px;
-    margin-left: 20px; /* Adds spacing between logo and button */
+    margin-left: 20px;
 }
 
 
@@ -63,7 +61,6 @@ body {
     border-radius: 5px;
 }
 
-/* Centered Welcome Box */
 .container {
     display: flex;
     justify-content: center;
@@ -94,7 +91,6 @@ hr {
     margin: 15px 0;
 }
 
-/* Links */
 .login-link, .register-link, .contact-link {
     color: #17a2b8;
     text-decoration: none;
@@ -105,7 +101,6 @@ hr {
     text-decoration: underline;
 }
 
-/* Footer */
 footer {
     background-color: #222;
     color: white;

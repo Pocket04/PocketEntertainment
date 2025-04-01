@@ -1,4 +1,4 @@
-/* Ensure the page takes up the full viewport height */
+
 html, body {
     background-image: url('../images/POP.webp');
     background-size: cover;
@@ -12,7 +12,6 @@ html, body {
     font-family: Arial, sans-serif;
 }
 
-/* Navbar */
 .navbar {
     background-color: #222;
     color: white;
@@ -47,20 +46,20 @@ button {
 .auth-buttons {
     display: flex;
     align-items: center;
-    justify-content: flex-end; /* Aligns everything to the right */
-    margin-left: 20px; /* Adjust this value to create space between the currencies and the logout button */
+    justify-content: flex-end;
+    margin-left: 20px;
 }
 
 .currency-container {
     display: flex;
     align-items: center;
-    margin-right: 20px; /* Space between the currencies and the logout button */
+    margin-right: 20px;
 }
 
 .currency-item {
     display: flex;
     align-items: center;
-    margin-right: 10px; /* Space between each currency */
+    margin-right: 10px;
 }
 
 .currency-icon {
@@ -72,7 +71,7 @@ button {
 
 .buy-currency {
     font-size: 20px;
-    background-color: #4CAF50; /* Green color for the button */
+    background-color: #4CAF50;
     color: white;
     border: none;
     padding: 5px 10px;
@@ -81,25 +80,23 @@ button {
 }
 
 .buy-currency:hover {
-    background-color: #45a049; /* Darker green on hover */
+    background-color: #45a049;
 }
 
 .auth-buttons button {
-    background-color: #d63384;
+    background-color: #e91e63;
     color: white;
     margin-left: 5px;
 }
 
-/* Users Table Container */
 .container {
-    flex: 1; /* Pushes footer to the bottom */
+    flex: 1;
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 20px;
 }
 
-/* Users List Box */
 .auth-box {
     background-color: white;
     padding: 25px;
@@ -110,7 +107,6 @@ button {
     text-align: center;
 }
 
-/* Users Table */
 .users-table {
     width: 100%;
     border-collapse: collapse;
@@ -121,6 +117,7 @@ button {
     border: 1px solid #ccc;
     padding: 10px;
     text-align: left;
+    word-wrap: break-word;
 }
 
 .users-table th {
@@ -143,13 +140,13 @@ button {
 .currency-container {
     display: flex;
     align-items: center;
-    margin-right: 20px; /* Space between the currencies and the logout button */
+    margin-right: 20px;
 }
 
 .currency-item {
     display: flex;
     align-items: center;
-    margin-right: 10px; /* Space between each currency */
+    margin-right: 10px;
 }
 
 .currency-icon {
@@ -161,7 +158,7 @@ button {
 
 .buy-currency {
     font-size: 20px;
-    background-color: #4CAF50; /* Green color for the button */
+    background-color: #4CAF50;
     color: white;
     border: none;
     padding: 5px 10px;
@@ -170,7 +167,7 @@ button {
 }
 
 .buy-currency:hover {
-    background-color: #45a049; /* Darker green on hover */
+    background-color: #45a049;
 }
 
 .currency button{
@@ -181,7 +178,6 @@ button {
     height: 35px;
 }
 
-/* Change Role Button */
 .role-button {
     background-color: #e91e63;
     color: white;
@@ -196,7 +192,6 @@ button {
     background-color: #c2185b;
 }
 
-/* Footer - Always Sticks to Bottom */
 footer {
     background-color: #222;
     color: white;

@@ -4,41 +4,40 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pocket Entertainment</title>
-    <link rel="stylesheet" href="/css/indexStyle.css">
+    <link rel="stylesheet" href="/css/POPStyle.css">
 </head>
 <body>
-    <nav class="navbar">
-        <div class="nav-left">
+
+<nav class="navbar">
+    <div class="nav-left">
+        <a>
             <h1>Pocket Entertainment</h1>
-        </div>
-        <div class="auth-buttons">
-            <a th:href="@{/register}">
-                <button class="register">Register</button>
-            </a>
-            <a th:href="@{/login}">
-                <button class="login">Log In</button>
-            </a>
-        </div>
-    </nav>
-
-    <div class="container">
-        <div class="welcome-box">
-            <h2>Welcome to Pocket Entertainment!</h2>
-            <p>
-                "Pocket Entertainment" is a premier developer and publisher of entertainment software, and the company is on its way 
-                to become the world's greatest gaming company. We are currently developing the soon-to-be World of Warcraft killer,
-                <strong>Planet of Peace</strong>.
-            </p>
-            <hr>
-            <p>
-                <a th:href="@{/login}" class="login-link">Login</a> <strong>if you are an existing adventurer, or</strong>
-                <a th:href="@{/register}" class="register-link">Register</a> <strong>if you are a lvl 1 rookie.</strong>
-            </p>
-        </div>
+        </a>
     </div>
+    <div class="auth-buttons">
+        <a th:href="@{/login}">
+            <button class="logout">Log In</button>
+        </a>
+        <a th:href="@{/register}">
+            <button class="logout">Register</button>
+        </a>
+    </div>
+</nav>
 
-    <footer>
-        <p>© 2025 Pocket Entertainment. All Rights Reserved.</p>
-    </footer>
+<div class="container">
+    <div class="game-box">
+        <h1>Planet of Peace</h1>
+        <p class="game-description">
+            **Planet of Peace** is an upcoming adventure game where players explore a beautifully crafted alien world.
+            Immerse yourself in stunning landscapes, solve engaging puzzles, and experience an emotional journey that
+            encourages harmony and collaboration.
+        </p>
+    </div>
+</div>
+
+<footer>
+    <p>© 2025 Pocket Entertainment. All Rights Reserved.</p>
+</footer>
+
 </body>
 </html>

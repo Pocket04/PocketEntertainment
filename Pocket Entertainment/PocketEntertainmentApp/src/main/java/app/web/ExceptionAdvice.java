@@ -15,6 +15,8 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.resource.NoResourceFoundException;
 
+import java.util.UUID;
+
 @ControllerAdvice
 public class ExceptionAdvice {
 
@@ -45,8 +47,9 @@ public class ExceptionAdvice {
 
     @ExceptionHandler(NoEuroException.class)
     public String handleNoEuroException(RedirectAttributes redirectAttributes, Exception ex){
-        redirectAttributes.addFlashAttribute("noEuro", ex.getMessage());
-        return "redirect:/home";
+        redirectAttributes.addFlashAttribute("noEuro", "EUR Balance not enough.");
+        UUID id = UUID.fromString(ex.getMessage());
+        return String.format("redirect:/wallets/" + id);
     }
 
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
@@ -54,7 +57,7 @@ public class ExceptionAdvice {
     public ModelAndView handleException() {
 
         ModelAndView mav = new ModelAndView();
-        mav.setViewName("unexpectedError");
+        mav.setViewName("exception");
 
         return mav;
     }

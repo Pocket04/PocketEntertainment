@@ -67,7 +67,7 @@ public class WalletService {
         ptBalance = ptBalance.add(addCurrencyRequest.getAmount());
 
         if(eurBalance.compareTo(BigDecimal.ZERO) < 0) {
-            throw new NoEuroException("EUR Balance less than 0");
+            throw new NoEuroException(ptWallet.getOwner().getId().toString());
         }
         eurWallet.setBalance(eurBalance);
         ptWallet.setBalance(ptBalance);

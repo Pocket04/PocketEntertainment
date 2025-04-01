@@ -1,4 +1,4 @@
-/* General Page Styling */
+
 html, body {
     background-image: url('../images/POP.webp');
     background-size: cover;
@@ -12,7 +12,6 @@ html, body {
     font-family: Arial, sans-serif;
 }
 
-/* Navbar */
 .navbar {
     background-color: #222;
     color: white;
@@ -49,16 +48,14 @@ html, body {
     margin-left: 8px;
 }
 
-/* Centered Content */
 .container {
-    flex: 1; /* Pushes footer to bottom */
+    flex: 1;
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 20px;
 }
 
-/* Reviews Box */
 .auth-box {
     background-color: white;
     padding: 25px;
@@ -70,12 +67,10 @@ html, body {
     flex-direction: column;
 }
 
-/* Reviews List */
 .reviews-list {
     margin-top: 15px;
 }
 
-/* Individual Review */
 .review {
     display: grid;
     grid-template-columns: 1fr;
@@ -121,7 +116,6 @@ form{
     word-wrap: break-word;
 }
 
-/* Star Rating */
 .stars {
     color: #f1c40f;
     font-size: 18px;
@@ -130,7 +124,6 @@ h2, h3 {
     text-align: center;
 }
 
-/* Footer */
 footer {
     background-color: #222;
     color: white;

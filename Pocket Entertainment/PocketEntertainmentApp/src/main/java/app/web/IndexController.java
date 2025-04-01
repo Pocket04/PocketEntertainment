@@ -6,6 +6,7 @@ import app.cosmetic.service.CosmeticService;
 import app.game.model.Game;
 import app.game.service.GameService;
 import app.notification.dto.NotificationRequest;
+import app.notification.dto.NotificationResponse;
 import app.notification.service.NotificationService;
 import app.security.AuthenticationMetadata;
 import app.user.model.User;
@@ -43,8 +44,10 @@ public class IndexController {
 
 
     @GetMapping("/")
-    public String indexPage() {
-        return "index";
+    public ModelAndView indexPage() {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("index");
+        return modelAndView;
     }
 
     @GetMapping("/home")
@@ -104,13 +107,6 @@ public class IndexController {
         return "redirect:/login";
     }
 
-    @GetMapping("/planet-of-peace")
-    public ModelAndView planetOfPeace(@AuthenticationPrincipal AuthenticationMetadata authenticationMetadata) {
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("POP");
-        return modelAndView;
-    }
-
     @GetMapping("/contacts")
     public ModelAndView contacts() {
         ModelAndView modelAndView = new ModelAndView();
@@ -127,6 +123,18 @@ public class IndexController {
         notificationService.sendNotification(notificationRequest, authenticationMetadata.getId());
 
         return "redirect:/home";
+    }
+    @GetMapping("/notifications")
+    public ModelAndView notifications(@AuthenticationPrincipal AuthenticationMetadata metadata) {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("notifications");
+        List<NotificationResponse> notifications = notificationService.getAllNotifications(metadata.getId());
+        modelAndView.addObject("notifications", notifications);
+        return modelAndView;
+    }
+    @GetMapping("/planet-of-peace")
+    public String POP() {
+        return "POP";
     }
 
 }

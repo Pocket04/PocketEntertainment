@@ -9,9 +9,11 @@ import app.web.dto.AddCurrencyRequest;
 import jakarta.validation.Valid;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 import java.util.UUID;
@@ -43,16 +45,17 @@ public class WalletController {
         return mav;
     }
     @PutMapping("/{id}")
-    public String addCurrency(@PathVariable UUID id,@AuthenticationPrincipal AuthenticationMetadata metadata, @Valid AddCurrencyRequest addCurrencyRequest, BindingResult bindingResult) {
-
+    public String addCurrency(@PathVariable UUID id, @AuthenticationPrincipal AuthenticationMetadata metadata, @Valid AddCurrencyRequest addCurrencyRequest, BindingResult bindingResult, RedirectAttributes redirect) {
+        UUID userId = walletService.findWalletById(id).getOwner().getId();
         if (bindingResult.hasErrors()) {
-            return "redirect:/home";
+            redirect.addFlashAttribute("error", "Minimum amount is 1.");
+            return String.format("redirect:/wallets/" + userId);
         }
         User user = userService.getUserById(metadata.getId());
         Wallet wallet = walletService.findWalletById(id);
         walletService.addCurrency(wallet, addCurrencyRequest, user);
 
-        return "redirect:/home";
+        return String.format("redirect:/wallets/" + userId);
     }
 
 }

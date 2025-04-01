@@ -20,7 +20,6 @@
     </div>
 </nav>
 
-    <!-- Add Cosmetic Form Container -->
     <div class="container">
         <div class="auth-box">
             <h2>Add Cosmetic</h2>
@@ -39,7 +38,7 @@
 
                 <label for="game">Select Game:</label>
                 <select id="game" required th:field="*{game}">
-                    <option th:each="igame : ${games}" th:text="${igame.name}" th:value="${igame}"></option>
+                    <option th:each="game : ${games}" th:text="${game.name}" th:value="${game.id}"></option>
                 </select>
                 <p th:if="${#fields.hasErrors('game')}" th:errors="*{game}" class="text-warning">Error Text Here</p>
 
@@ -52,7 +51,6 @@
         </div>
     </div>
 
-    <!-- Footer -->
     <footer>
         <p>© 2025 Pocket Entertainment. All Rights Reserved.</p>
     </footer>

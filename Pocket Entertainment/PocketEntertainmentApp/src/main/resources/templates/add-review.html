@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact Us</title>
+    <title>Add Review</title>
     <link rel="stylesheet" href="/css/loginRegisterStyle.css">
 </head>
 <body>
@@ -23,7 +23,6 @@
     </div>
 </nav>
 
-<!-- Contact Us Form Container -->
 <form class="container" th:action="@{/reviews/add}" th:method="POST" th:object="${addReviewRequest}">
     <div class="auth-box">
         <h2>What do you think about the game?</h2>
@@ -58,7 +57,6 @@
     </div>
 </form>
 
-<!-- Footer -->
 <footer>
     <p>© 2025 Pocket Entertainment. All Rights Reserved. | <a th:href="@{/contacts}" class="contact-link">Contact us</a></p>
 </footer>

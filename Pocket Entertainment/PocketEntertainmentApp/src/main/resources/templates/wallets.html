@@ -8,7 +8,6 @@
 </head>
 <body>
 
-<!-- Navbar -->
 <nav class="navbar">
     <div class="nav-left">
         <a th:href="@{/home}" >
@@ -32,10 +31,11 @@
     </div>
 </nav>
 
-<!-- Users List Table -->
 <div class="container">
     <div class="auth-box">
-        <h2 th:text="${user.username} + '\'s wallets.'">Your Wallets</h2>
+        <h2 th:text="${user.username} + '\'s wallets.'"></h2>
+        <p style="text-align: center; color: red" th:text="${noEuro}"></p>
+        <p style="text-align: center; color: red" th:text="${error}"></p>
         <table class="users-table">
             <thead>
             <tr>
@@ -64,7 +64,6 @@
     </div>
 </div>
 
-<!-- Footer -->
 <footer>
     <p>© 2025 Pocket Entertainment. All Rights Reserved. | <a th:href="@{/contacts}" class="contact-link">Contact us</a></p>
 </footer>
