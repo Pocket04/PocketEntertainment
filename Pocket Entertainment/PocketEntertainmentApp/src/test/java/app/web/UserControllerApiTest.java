@@ -44,7 +44,7 @@ public class UserControllerApiTest {
 
         mockMvc.perform(request)
                 .andExpect(status().isNotFound())
-                .andExpect(view().name("exception"));
+                .andExpect(view().name("notFound"));
 
     }
 
@@ -136,7 +136,7 @@ public class UserControllerApiTest {
 
         mockMvc.perform(request)
                 .andExpect(status().isNotFound())
-                .andExpect(view().name("exception"));
+                .andExpect(view().name("notFound"));
         verify(userService, never()).getUserById(any());
         verify(userService, never()).changeRole(any());
     }
