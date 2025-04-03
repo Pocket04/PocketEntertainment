@@ -1,0 +1,27 @@
+html, body {
+    background-image: url('../images/NotFound.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100%;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    background-color: #eceff4;
+    font-family: Arial, sans-serif;
+}
+button {
+    margin-left: 225px;
+    margin-top: 500px;
+    background-color: red;
+    color: white;
+    padding: 20px 40px;
+    font-size: 20px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+button:hover{
+    background-color: darkred;
+}

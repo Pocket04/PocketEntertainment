@@ -25,7 +25,7 @@ public class ExceptionAdvice {
     public ModelAndView handleNotFoundExceptions(Exception ex){
 
         ModelAndView mav = new ModelAndView();
-        mav.setViewName("exception");
+        mav.setViewName("notFound");
         mav.addObject("exception", ex.getMessage());
 
         return mav;
